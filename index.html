@@ -4,28 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashwath's Robotics Portfolio</title>
+    <title>Ashwath Karthikeyan's Portfolio</title>
     <!-- Add any additional CSS links or styles here. For now, I'm adding a tiny bit of inline CSS for simplicity -->
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Open Sans', sans-serif; /* A more modern font */
             padding: 50px;
+            color: #333; /* A slightly softer color than pure black */
+            background: #f9f9f9; /* A light background to ensure readability */
         }
-
+    
         header {
-            background-color: #f5f5f5;
+            background-color: #0077cc; /* A vibrant header color */
+            color: #ffffff; /* White text for contrast */
             padding: 20px;
             text-align: center;
             margin-bottom: 40px;
         }
-
-        section {
-            margin-bottom: 30px;
+    
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif; /* A contrasting font for headers */
         }
-
+    
         h2 {
-            border-bottom: 2px solid #333;
+            border-bottom: 3px solid #0077cc; /* A colored underline for section headers */
             padding-bottom: 10px;
+        }
+    
+        a {
+            color: #0077cc; /* Match links to the theme color */
+            text-decoration: none; /* No underlines on links */
+        }
+    
+        a:hover {
+            text-decoration: underline; /* Underline links on hover for interactivity */
+        }
+    </style>
+    <style>
+        .project img {
+            width: 20%;
+            height: auto;
+            border-radius: 5px; /* Rounded corners for images */
+        }
+    
+        .project img:hover {
+            opacity: 0.8; /* Slight fade effect on hover */
+        }
+    </style>
+    <style>
+        button {
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer; /* Indicates that it's clickable */
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        }
+    
+        button:hover {
+            background-color: #005fa3; /* Darken button color on hover */
+        }
+    </style>
+    <style>
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 20px;
+            }
+    
+            header {
+                margin-bottom: 20px;
+            }
+    
+            .project {
+                grid-template-columns: 1fr; /* Stack projects on top of each other on small screens */
+            }
         }
     </style>
 </head>
@@ -34,35 +89,63 @@
 
     <!-- Header Section -->
     <header>
-        <h1>Ashwath's Robotics Portfolio</h1>
-        <p>Robotics Engineer | Student at UIUC</p>
+        <h1>Ashwath Karthikeyan</h1>
+        <p>Robotics Engineer | Student at UIUC | Autonomous Systems | Self-Driving Vehicles</p>
     </header>
 
     <!-- About Me Section -->
     <section>
         <h2>About Me</h2>
         <p>
-            Hey there! I'm Ashwath, currently pursuing my master's in Robotics at the University of Illinois at Urbana-Champaign. By understanding how the brain of the robot works, I'm on a journey to push the boundaries of what robots can achieve.
+            Hey there! I'm Ashwath, currently pursuing my Master's in Robotics at the University of Illinois at Urbana-Champaign. I hope that one day humans are not dealt the tasks too repetitive or dangerous and I hope that I will be a part of that change.
         </p>
     </section>
 
     <!-- Projects Section -->
     <section>
         <h2>Projects</h2>
-        <!-- You can list your projects here. Here's a sample structure for one project. Duplicate as needed. -->
         <div class="project">
-            <h3>Tendon Driven Robotic Leg</h3>
-            <p>Insert description of the project.</p>
+            <h3><a href="https://github.com/ashwath-karthikeyan/autonomous-car-lane-detection">Lane Adherence and Traffic Sign Detection in Autonomous Cars</a></h3>
+            <p>Created an vision system algorithm to detect the lanes on the road and maintain the Autonomous Vehicle within the lanes. Additionally programmed the car to detect stop signs and act accordingly.</p>
+            <p>Skills used : Computer Vision, Python</p>
             <!-- You can also add images, videos, or links related to the project -->
-            <!-- <img src="path_to_image.jpg" alt="Description of Image"> -->
+            <a href="https://github.com/ashwath-karthikeyan/autonomous-car-lane-detection"><img src="gem.png" alt="GEM car"></a>
+    </section>
+    <section>
+            <h3><a href="https://github.com/ashwath-karthikeyan/ros-slam-gazebo"></a>Turtlebot3 SLAM Navigation in ROS-Gazebo</a></h3>
+            <p>Developed an algorithm to find a path and make the robot follow it to reach a virtual goal in a Gazebo environment using inbuilt packages in ROS.</p>
+            <p>Skills used : ROS, Path Planning, Mapping, Localization, Python</p>
+            <!-- You can also add images, videos, or links related to the project -->
+            <a href="https://github.com/ashwath-karthikeyan/ros-slam-gazebo"><img src="slam.png" alt="SLAM Gazebo"></a>
+
+            <h3><a href="https://github.com/ashwath-karthikeyan/rotary-inverted-pendulum">Rotary Inverted Pendulum </a></h3>
+            <p>Designed a state space controller to maintain a simulated model of a Rotary Inverted Pendulum at upright position.</p>
+            <p>Skills used : CAD, MATLAB and Simulink, Controller Design and Tuning</p>
+            <!-- You can also add images, videos, or links related to the project -->
+            <a href="https://github.com/ashwath-karthikeyan/rotary-inverted-pendulum"><img src="rip.png" alt="Rotary Inverted Pendulum"></a>
+
+            <h3><a href="https://github.com/ashwath-karthikeyan/robot-leg">Tendon-Driven Robot Leg</a></h3>
+            <p>Developed a Robotic Leg Testing Rig to validate the feasibility of a BLDC backdrivable approach as an alternative method of terrain adaptability for quadruped robot limbs.</p>
+            <p>Skills used : CAD, Mathematical Modeling on MATLAB and Simulink, Arduino Coding</p>
+            <!-- You can also add images, videos, or links related to the project -->
+            <img src="leg.jpg" alt="Tendon Driven Robot Leg">
+
         </div>
+    </section>
+
+    <!-- Publication Section -->
+    <section>
+        <h2>Publications</h2>
+        
+
     </section>
 
     <!-- Contact Section -->
     <section>
-        <h2>Contact</h2>
+        <h2>Contact Me</h2>
         <p>
-            To contact me, drop me an email at: <a href="mailto:ashwath.karthikeyan@gmail.com">ashwath.karthikeyan@gmail.com</a>
+            Email @ <a href="mailto:ashwath.karthikeyan@gmail.com">ashwath.karthikeyan@gmail.com</a> <br>
+            Connect on <a href="https:/linkedin.com/in/ashwath-karthikeyan">LinkedIn</a>
         </p>
     </section>
 
