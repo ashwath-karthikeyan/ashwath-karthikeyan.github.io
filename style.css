@@ -4,7 +4,7 @@
 
 * {
   margin: 0;
-  /* padding: 0; */
+  padding: 0;
 }
 
 body {
@@ -36,7 +36,7 @@ nav,
 nav {
   justify-content: space-around;
   align-items: center;
-  height: 15vh; /* Reduced height */
+  height: 17vh;
 }
 
 .nav-links {
@@ -149,9 +149,9 @@ a:hover {
 /* SECTIONS */
 
 section {
-  padding-top: 1vh; /* Reduced top padding */
-  height: 90vh; /* Adjusted height */
-  margin: 0 8rem; /* Reduced horizontal margin */
+  padding-top: 4vh;
+  height: 96vh;
+  margin: 0 10rem;
   box-sizing: border-box;
   min-height: fit-content;
 }
@@ -165,14 +165,14 @@ section {
 #profile {
   display: flex;
   justify-content: center;
-  gap: 3rem; /* Reduced gap */
-  height: 70vh; /* Reduced height */
+  gap: 5rem;
+  height: 80vh;
 }
 
 .section__pic-container {
   display: flex;
-  height: 350px; /* Reduced size */
-  width: 350px; /* Reduced size */
+  height: 400px;
+  width: 400px;
   margin: auto 0;
 }
 
@@ -191,7 +191,7 @@ section {
 
 .section__text__p2 {
   font-size: 1.75rem;
-  margin-bottom: 0.5rem; /* Reduced bottom margin */
+  margin-bottom: 1rem;
 }
 
 .title {
@@ -202,7 +202,7 @@ section {
 #socials-container {
   display: flex;
   justify-content: center;
-  margin-top: 0.5rem; /* Reduced top margin */
+  margin-top: 1rem;
   gap: 1rem;
 }
 
@@ -218,13 +218,13 @@ section {
 .btn-container {
   display: flex;
   justify-content: center;
-  gap: 0.5rem; /* Reduced gap */
+  gap: 1rem;
 }
 
 .btn {
   font-weight: 600;
   transition: all 300ms ease;
-  padding: 0.8rem; /* Reduced padding */
+  padding: 1rem;
   width: 8rem;
   border-radius: 2rem;
 }
@@ -258,7 +258,7 @@ section {
 }
 
 .btn-container {
-  gap: 0.5rem; /* Consistent with reduced gap above */
+  gap: 1rem;
 }
 
 /* ABOUT SECTION */
@@ -268,9 +268,9 @@ section {
 }
 
 .about-containers {
-  gap: 1rem; /* Reduced gap */
-  margin-bottom: 1rem; /* Reduced margin */
-  margin-top: 1rem; /* Reduced margin */
+  gap: 2rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 .about-details-container {
@@ -294,7 +294,7 @@ section {
 }
 
 .details-container {
-  padding: 2rem; /* Reduced padding */
+  padding: 1.5rem;
   flex: 1;
   background: white;
   border-radius: 2rem;
@@ -304,13 +304,13 @@ section {
 }
 
 .section-container {
-  gap: 3rem; /* Reduced gap */
+  gap: 4rem;
   height: 80%;
 }
 
 .section__pic-container {
-  height: 350px; /* Reduced size */
-  width: 350px; /* Reduced size */
+  height: 400px;
+  width: 400px;
   margin: auto 0;
 }
 
@@ -318,14 +318,13 @@ section {
 
 #experience {
   position: relative;
-  height: 70vh;
 }
 
 .experience-sub-title {
   color: rgb(85, 85, 85);
   font-weight: 600;
   font-size: 1.75rem;
-  margin-bottom: 2rem; /* Reduced margin */
+  margin-bottom: 2rem;
 }
 
 .experience-details-container {
@@ -339,7 +338,7 @@ section {
   text-align: initial;
   flex-wrap: wrap;
   flex-direction: row;
-  gap: 4rem; /* Reduced gap */
+  gap: 2.5rem;
   justify-content: space-around;
 }
 
@@ -357,25 +356,23 @@ article .icon {
 /* PROJECTS SECTION */
 
 #projects {
-  padding-top: 2vh;
   position: relative;
-  height: 100vh;
+  height : 120vh;
 }
 
 .color-container {
-  height: 80vh;
   border-color: rgb(163, 163, 163);
-  background: rgb(240, 240, 240); /* Slightly lighter */
+  background: rgb(250, 250, 250);
 }
 
 .project-img {
   border-radius: 2rem;
-  width: 85%; /* Adjusted size */
-  height: 85%; /* Adjusted size */
+  width: 90%;
+  height: 90%;
 }
 
 .project-title {
-  margin: 2rem;
+  margin: 1rem;
   color: black;
 }
 
@@ -390,7 +387,7 @@ article .icon {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 30vh; /* Reduced height */
+  height: 70vh;
 }
 
 .contact-info-upper-container {
@@ -399,8 +396,8 @@ article .icon {
   border-radius: 2rem;
   border: rgb(53, 53, 53) 0.1rem solid;
   border-color: rgb(163, 163, 163);
-  background: (245, 245, 245); /* Slightly lighter */
-  margin: 1.5rem auto; /* Reduced margin */
+  background: (250, 250, 250);
+  margin: 2rem auto;
   padding: 0.5rem;
 }
 
@@ -427,7 +424,7 @@ article .icon {
 /* FOOTER SECTION */
 
 footer {
-  height: 20vh; /* Adjusted height */
+  height: 26vh;
   margin: 0 1rem;
 }
 
