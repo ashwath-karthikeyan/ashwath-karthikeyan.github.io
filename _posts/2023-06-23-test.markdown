@@ -2,8 +2,8 @@
 layout: post
 title:  
 permalink: /test/
-date:   2019-08-27 08:45:00
-image:  profile_pic.jpg
+date:   
+image: 
 tags:   [Test]
 ---
 
