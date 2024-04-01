@@ -1,0 +1,64 @@
+I"�<h3 id="background">Background</h3>
+
+<p>Upper-limb amputees experience <a href="/misc/major2018_ula_fall_prevalence.pdf">particularly high rates of falling</a>, with nearly 30% reporting two or more falls per year. Nearly 90% of these falls occur during activities of daily living (ADLs), with more than two-thirds of these occurring during walking. Prosthesis use is associated with a six-fold increase in the likelihood of frequent falls. <a href="/misc/kent2020_angular_momentum_imbalance.pdf">Research suggests</a> that falls during walking may be caused in part by asymmetries in upper-body angular momentum, which itself may be due to asymmetries in arm swing between the affected and non-affected sides. Furthermore, the use of a prosthesis actually caused these asymmetries to increase. Taken together, these factors suggest that the increasingly asymmetric motions correlated with prosthesis use contribute to the increased likelihood of falls seen in prosthesis users.</p>
+
+<h3 id="algorithm-development">Algorithm Development</h3>
+
+<p>The algorithm underpinning this device’s function was created from kinematic data obtained in Dr. Major’s motion analysis lab. Data was collected for two test subject groups, one group performing upper-limb ADLs such as cutting food and turning pages in a book, and the other group walking. Infrared light-emitting markers were attached to study participants at various anatomical landmarks; a series of cameras captured the positions of these markers during the tasks. I calculated the acceleration of the subjects’ non-dominant elbow marker by taking the second derivative of position, then performed a <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/Math/fft.html">Fast Fourier Transform</a> (FFT) on the acceleration data to determine the signal’s frequency components. Representative FFTs for the two subject groups are shown below.</p>
+
+<div class="post-flex-display">
+    <img src="/img/acc_fft_walking.png" alt="Walking FFT" style="width:40%" />
+    <img src="/img/acc_fft_adl.png" alt="ADL FFT" style="width:40%" />
+    <div class="full-line-object">
+        <div class="caption">
+            Acceleration FFT results for walking (left) and upper-limb ADL (right).
+        </div>
+    </div>
+</div>
+
+<p>The images above demonstrate the marked differences in signal composition between walking and upper-limb ADLs, namely, the significant presence of high-frequency components during ADLs. I took advantage of this phenomenon by designing the algorithm to determine how the FFT output was distributed across the frequency spectrum. Additionally, I set an upper bound on the acceleration signal itself to help detect walking acceleration signatures. In both the preliminary experimental data and data I obtained on myself while developing the algorithm, accelerations during walking remained below 1 G, while upper-limb ADL accelerations frequently exceeded that level, likely due to the fact that the hands are relatively small and often start, move, and stop rather quickly when performing tasks. I was thus able to establish multiple check criteria for distinguishing walking activity.</p>
+
+<h3 id="code">Code</h3>
+
+<p>Code for this project can be found in <a href="https://github.com/riley-knox/ul-amp-walk-assist">this Github repository</a> under Software.</p>
+
+<p>I wrote software for the device’s embedded microcontroller in C. I wrote multiple libraries for this project, including SD card, inertial measurement unit (IMU), and OLED display integration, libraries for digital communication over <a href="https://www.circuitbasics.com/basics-of-the-i2c-communication-protocol/#:~:text=I2C%20is%20a%20serial%20communication,always%20controlled%20by%20the%20master.">I2C</a>, <a href="https://www.circuitbasics.com/basics-of-the-spi-communication-protocol/">SPI</a>, and <a href="https://www.circuitbasics.com/basics-uart-communication/">UART</a> protocols, and digital signal processing. I also wrote a utilities library containing functions and definitions used by all other libraries. The flowchart below shows the hierarchy of all custom microcontroller software libraries.</p>
+
+<div class="post-flex-display">
+    <img src="/img/code_structure.png" alt="Code Map" style="width:80%" />
+    <div class="full-line-object">
+        <div class="caption">
+            Hierarchy of all custom code libraries.
+        </div>
+    </div>
+</div>
+
+<p>I also wrote Python and Matlab programs to retrieve and analyze data from the device. Python transmits a signal to the device over UART; the device responds with a data set containing the acceleration signal and FFT results, which are saved into a time-stamped CSV file. Matlab reads the CSV file, verifies the FFT results, and plots the data. I used the Python-to-Matlab pipeline frequently when designing the algorithm to distinguish walking acceleration patterns.</p>
+
+<h3 id="circuit">Circuit</h3>
+
+<p>Circuit schematics and KiCad files can be found under Circuit in the previously linked Github repository.</p>
+
+<p>The processor unit on which the device is based is the <a href="https://www.microchip.com/wwwproducts/en/PIC32MX170F256B">PIC32MX170F256B</a>, a 32-bit microcontroller made by MicroChip. The processor has a maximum clock speed of 48 MHz, which allows the acceleration measurement and digital signal processing circuit to run comfortably at a speed of 150 Hz.</p>
+
+<p>Acceleration is measured by an <a href="https://www.pololu.com/product/2736">LSM6DS33</a> IMU, which incorporates a 3-axis accelerometer/gyroscope onto a breakout board, which makes it easy to switch back and forth between the breadboard and wearable versions of the device. The IMU samples acceleration at 1.6 KHz, more than fast enough to accommodate our data acquisition needs.</p>
+
+<p>Both the breadboard and wearable device feature a UART interface to allow data streaming to a connected laptop. The wearable device is powered by a 9-volt battery, while the breadboard circuit can be powered via a microUSB cable. The circuit also includes reset and user interface buttons, a power supply LED, a “heartbeat” LED to indicate proper code execution, and an indicator LED that illuminates when walking is detected. The circuit schematic is shown below.</p>
+
+<div class="post-flex-display">
+    <a href="/misc/circuit_final.pdf">
+        <img src="/img/circuit_final.png" atl="Final Schematic" style="height:300px" />
+    </a>
+    <div class="full-line-object">
+        <div class="caption">
+            Click the schematic to view it at full size.
+        </div>
+    </div>
+</div>
+
+<h3 id="demonstration">Demonstration</h3>
+
+<div class="video-box">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/lfoHiOGTkdQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</div>
+:ET

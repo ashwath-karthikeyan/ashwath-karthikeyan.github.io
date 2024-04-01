@@ -40,13 +40,17 @@
   box-shadow: 0 9px 18px 0 rgba(0,0,0,0.25);
 }
 
+.post-divider {
+    border-bottom: 2px solid $border-color;
+    margin-bottom: 15px;
+}
+
 .post-head, .post-body {
-  margin-bottom: 20px;
   border-bottom: 1px solid $border-color;
 }
 
 .post-head {
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   .post-tag {
     margin-bottom: 20px;
     text-align: center;
@@ -131,7 +135,9 @@
 }
 
 .post-body {
+  padding-top: 20px;
   padding-bottom: 20px;
+  text-align: justify;
 }
 
 .post-share {
@@ -149,6 +155,31 @@
       }
     }
   }
+}
+
+.video-box {
+    margin-bottom: 15px;
+}
+
+.post-flex-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    width: 100%;
+    a {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .full-line-object {
+        .caption {
+            font-size: 15px;
+            font-style: italic;
+            text-align: center;
+        }
+        padding-top: 10px;
+        width: 100%
+    }
 }
 
 // POST NAVIGATION
