@@ -56,33 +56,6 @@
   padding-bottom: 20px;
 }
 
-.project-entry {
-  border-bottom: 2px solid $border-color;
-  margin-bottom: 20px;
-  padding: 10px;
-  .project-title {
-    font-size: 30px;
-    font-weight: 700;
-    text-decoration: underline;
-    margin-bottom: 15px;
-  }
-  .project-content {
-    width: 100%;
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: 15px;
-    .project-desc {
-      width: 70%;
-      font-size: 24px;
-      line-height: 2;
-    }
-    .project-img {
-      width: 30%;
-      margin: 0px 15px 0px;
-    }
-  }
-}
-
 @media only screen and (min-width: 576px) {
   .page-content {
     padding: 40px;

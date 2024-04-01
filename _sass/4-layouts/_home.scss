@@ -192,7 +192,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    height: 400px;
+    min-height: 450px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -230,8 +230,8 @@
     }
     .article-excerpt {
       max-width: 450px;
-      margin-bottom: 20px;
-      font-size: 20px;
+      margin-bottom: 30px;
+      font-size: 14px;
       line-height: 23px;
     }
     .button {
@@ -266,7 +266,6 @@
     }
   }
   .article-box {
-      width: 100%;
     padding-bottom: 20px;
     border-bottom: 2px solid $border-color;
   }
@@ -303,7 +302,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      font-size: 40px;
+      font-size: 110px;
       text-align: center;
       letter-spacing: 2px;
       color: $text;
@@ -388,7 +387,7 @@
         line-height: 45px;
       }
       .article-excerpt {
-        margin-bottom: 30px;
+        margin-bottom: 50px;
       }
     }
   }
