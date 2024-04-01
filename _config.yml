@@ -3,7 +3,7 @@
 
 title: Ashwath Karthikeyan Portfolio
 description: Amogus Test Poggers # this means to ignore newlines until "baseurl:"
-baseurl: "/galada" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://ashwath-karthikeyan.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 
 
