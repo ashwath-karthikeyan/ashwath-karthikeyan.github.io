@@ -2,7 +2,7 @@
 layout: post
 title:  
 permalink: /kalman-filter/
-date:
+date:   2019-08-27 08:45:00
 image:  
 tags:   [State Estimation]
 ---
