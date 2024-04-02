@@ -11,7 +11,7 @@
   align-items: center;
   padding-bottom: 15px;
   margin-bottom: 10px;
-  border-bottom: 1px solid $border-color;
+  // border-bottom: 1px solid $border-color;
   .logo-text {
     font-size: 16px;
     font-weight: 700;
@@ -45,6 +45,7 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  border-bottom: 1px solid $border-color;
   .copyright {
     margin-right: 60px;
     p {
@@ -61,6 +62,14 @@
   }
   .footer-social {
     ul {
+      p {
+        display: inline;
+        margin-left: 15px;
+        margin-bottom: 0;
+        font-size: 13px;
+        font-weight: bold;
+        color: $gray-blue;
+      }
       li {
         display: inline-block;
         margin-left: 15px;
