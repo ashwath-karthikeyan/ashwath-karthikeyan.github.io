@@ -7,4 +7,4 @@ image:  dijkstra.png
 tags:   [Path Planning]
 ---
 # Grid Planning Algorithms
-[github repo](https://github.com/ashwath-karthikeyan/dijkstra.git)
+[github repo](https://github.com/ashwath-karthikeyan/grid-planning.git)
