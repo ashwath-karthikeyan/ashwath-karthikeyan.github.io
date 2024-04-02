@@ -80,7 +80,7 @@
   {% endif %}
 
   <div class="widget widget-tags">
-    <h3 class="widget-title">Project Topics</h3>
+    <h3 class="widget-title">Project Tags</h3>
     {% capture site_tags %}{% for tag in site.tags %}{{ tag | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{%
     endcapture %} {% assign tag_words = site_tags | split:',' | sort %}
     <ul class="tag-list list-reset">
