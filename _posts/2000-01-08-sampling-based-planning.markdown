@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  Probabilistic Planning Algorithms
-permalink: /probabilistic-planners/
-date:   2019-08-27 08:45:00
+title:  Sampling-Based Planning Algorithms
+permalink: /sampling-based-planners/
+date:   2024-03-20
 image:  rrt.png
 tags:   [Planning]
 ---

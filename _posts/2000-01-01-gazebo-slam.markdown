@@ -2,7 +2,7 @@
 layout: post
 title:  Performing SLAM on a TurtleBot3 Waffle in Gazebo
 permalink: /gazebo-slam/
-date:   2019-08-27 08:45:00
+date:   2022-09-15
 image:  slam.png
 tags:   [SLAM]
 ---

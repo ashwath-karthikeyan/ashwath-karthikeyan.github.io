@@ -2,7 +2,7 @@
 layout: post
 title:  Lane Adherence of an Autonomous Car
 permalink: /lane-adherence/
-date:   2019-08-27 08:45:00
+date:   2023-11-20
 image:  lane_fit.png
 tags:   [Autonomous Vehicles, Planning, Perception]
 ---
