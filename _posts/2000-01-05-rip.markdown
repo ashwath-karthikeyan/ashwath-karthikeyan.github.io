@@ -8,4 +8,6 @@ tags:   [Control]
 ---
 ### Simulation of a Rotary Inverted Pendulum in Matlab-Simulink.
 
-[github repo](https://github.com/ashwath-karthikeyan/rotary-inverted-pendulum)
+![rotary inverted pendulum](../img/rip.png)
+
+[github repo](https://github.com/ashwath-karthikeyan/rotary-inverted-pendulum.git)

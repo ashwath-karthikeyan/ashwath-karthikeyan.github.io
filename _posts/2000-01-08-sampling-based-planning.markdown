@@ -8,4 +8,6 @@ tags:   [Planning]
 ---
 ### Probabilistic Planning Algorithms
 
-[github repo](https://github.com/ashwath-karthikeyan/dubin-car-path-planning)
+![Profile Pic](../img/rrt.png)
+
+[github repo](https://github.com/ashwath-karthikeyan/sampling-based-planning.git)

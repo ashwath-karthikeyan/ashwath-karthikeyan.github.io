@@ -8,4 +8,6 @@ tags:   [Planning]
 ---
 ### Grid Planning Algorithms
 
+![grid planning](../img/dijkstra.png)
+
 [github repo](https://github.com/ashwath-karthikeyan/grid-planning.git)
