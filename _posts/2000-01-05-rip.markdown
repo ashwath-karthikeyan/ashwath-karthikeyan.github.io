@@ -8,6 +8,24 @@ tags:   [Control]
 ---
 ## Simulation of a Rotary Inverted Pendulum in Matlab-Simulink.
 
-<img src="/img/rip.png"  width="400" height="400">
+<center><img src="/img/rip.png" alt="RIP" height="400" width="400"></center> 
+
+A rotary inverted pendulum is a simple tool that can help strengthen fundamentals in control systems. 
+
+### Developing the CAD model
+
+### Importing it into Simulink
+
+### Designing the PID controller
+
+### Testing
+
+### Designing a state space controller
+
+### Testing
+
+### PID vs state space controller
+
+### Final thoughts
 
 [github repo](https://github.com/ashwath-karthikeyan/rotary-inverted-pendulum.git)

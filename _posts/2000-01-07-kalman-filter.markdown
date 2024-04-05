@@ -6,7 +6,7 @@ date:   2024-03-05
 image:  ekf.png
 tags:   [State Estimation]
 ---
-### State Estimation with Extended Kalman Filter
+## State Estimation with Extended Kalman Filter
 
 ![rrt](../img/ekf.png)
 

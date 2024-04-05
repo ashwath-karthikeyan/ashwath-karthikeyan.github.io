@@ -6,7 +6,7 @@ date:   2024-03-20
 image:  rrt.png
 tags:   [Planning]
 ---
-### Probabilistic Planning Algorithms
+## Probabilistic Planning Algorithms
 
 ![Profile Pic](../img/rrt.png)
 

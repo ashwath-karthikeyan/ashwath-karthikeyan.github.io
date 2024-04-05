@@ -6,7 +6,7 @@ date:   2022-09-15
 image:  slam.png
 tags:   [SLAM]
 ---
-### SLAM in Gazebo on TurtleBot3 Waffle
+## SLAM in Gazebo on TurtleBot3 Waffle
 
 ![slam gazebo](../img/slam.png)
 

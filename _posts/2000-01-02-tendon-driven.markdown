@@ -6,7 +6,7 @@ date:   2023-05-15
 image:  gait.png
 tags:   [Control, Fabrication]
 ---
-### Development of a Tendon-Driven Robot Leg Displaying Gait Motion
+## Development of a Tendon-Driven Robot Leg Displaying Gait Motion
 
 ![tendon driven](../img/gait.png)
 

@@ -7,6 +7,6 @@ permalink: /about/
 
 ## Welcome to my profile
 
-![Profile Pic](../img/profile_pic.jpg)
+<center><img src="/img/profile_pic.jpg" alt="profile_pic" height="400" width="400"></center> 
 
-I am Ashwath Karthikeyan, I'm a graduate student at The University of Illinois at Urbana-Champaign.
+I am Ashwath Karthikeyan, I'm a robotics graduate student at the University of Illinois at Urbana-Champaign.
