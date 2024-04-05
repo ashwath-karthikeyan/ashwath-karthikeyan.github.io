@@ -6,8 +6,8 @@ date:   2023-12-30
 image:  rip.png
 tags:   [Control]
 ---
-### Simulation of a Rotary Inverted Pendulum in Matlab-Simulink.
+## Simulation of a Rotary Inverted Pendulum in Matlab-Simulink.
 
-![rotary inverted pendulum](../img/rip.png)
+<img src="/img/rip.png"  width="500" height="500">
 
 [github repo](https://github.com/ashwath-karthikeyan/rotary-inverted-pendulum.git)
