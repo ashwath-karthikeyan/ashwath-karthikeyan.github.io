@@ -102,7 +102,11 @@ $$C = \begin{bmatrix}
 
 $$D = \begin{bmatrix} 0\\0\end{bmatrix}$$
 
-Once we have these matrices, we simply plug these values into pre-existing libraries such as the ones in MATLAB-Simulink to design the state space controller. With this controller, we see the performance of the RIP to have improved, even with large disturbances.
+The final step once we have these matrices is to design the observer based state-feedback controller. Determining the state feedback matrix $K_c$ is the first stage of this process, and for that we determine the desired closed-loop pole locations, with the help of the `place()` method in MATLAB. The second stage is placing the observer poles, $L_o$, at least five times as far away from the origin as $K_c$. This can also be done using the `place()` function.
+
+Finally, we plug all of the above determined values into the State Space Controller block in Simulink to arrive at our desired controller.
+
+With this controller, we see the performance of the RIP to have improved, even with large disturbances.
 
 <center><img src="/img/state_big.gif" alt="RIP" height="400" width="400"></center>
 <br>
