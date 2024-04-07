@@ -8,11 +8,11 @@ tags:   [Planning]
 ---
 ## Probabilistic Planning Algorithms
 
-### Randomly Sampled Control Inputs
+<!-- ### Randomly Sampled Control Inputs
 
 ### PRM
 
-### RRT
+### RRT -->
 <center><img src="/img/rrt.png" alt="RRT" height="400" width="400"></center>
 <br>
 

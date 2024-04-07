@@ -8,15 +8,15 @@ tags:   [Planning]
 ---
 ## Grid Planning Algorithms
 
-### Dijkstra Planning Algorithm
+<!-- ### Dijkstra Planning Algorithm -->
 <center><img src="/img/dijkstra.png" alt="Grid Planning" height="400" width="400"></center>
 <br>
 
-### A* Planning Algorithm
+<!-- ### A* Planning Algorithm
 
 ### Dijkstra With Turn Penalty
 
-### Dijkstra With Turn Penalty and Obstacles
+### Dijkstra With Turn Penalty and Obstacles -->
 
 documentation coming soon
 
