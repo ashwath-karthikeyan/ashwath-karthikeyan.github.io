@@ -8,6 +8,9 @@ tags:   [SLAM]
 ---
 ## SLAM in Gazebo on TurtleBot3 Waffle
 
-![slam gazebo](../img/slam.png)
+<center><img src="/img/slam.png" alt="SLAM" height="400" width="400"></center>
+<br>
+
+documentation coming soon
 
 [github repo](https://github.com/ashwath-karthikeyan/ros-slam-gazebo.git)

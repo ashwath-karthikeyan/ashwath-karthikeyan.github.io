@@ -8,7 +8,10 @@ tags:   [Control, Fabrication]
 ---
 ## Development of a Tendon-Driven Robot Leg Displaying Gait Motion
 
-![tendon driven](../img/gait.png)
+<center><img src="/img/gait.png" alt="Tendon Driven" height="400" width="400"></center>
+<br>
+
+documentation coming soon
 
 [github repo](https://github.com/ashwath-karthikeyan/robot-leg.git)
 

@@ -8,6 +8,9 @@ tags:   [State Estimation]
 ---
 ## State Estimation with Extended Kalman Filter
 
-![rrt](../img/ekf.png)
+<center><img src="/img/ekf.png" alt="EKF" height="400" width="400"></center>
+<br>
+
+documentation coming soon
 
 [github repo](https://github.com/ashwath-karthikeyan/kalman-filter.git)

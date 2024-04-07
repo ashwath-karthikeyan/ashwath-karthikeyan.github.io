@@ -11,7 +11,7 @@ tags:   [Control]
 <center><img src="/img/rip.png" alt="RIP" height="400" width="400"></center> 
 <br>
 
-The rotary inverted pendulum problem is a popular control theory project, and it exemplifies a classic challenge in dynamic systems and control engineering. This system, also known as the Furuta Pendulum, involves a pendulum attached to the end of a rotating arm, where the primary goal is to control the arm's rotation to keep the pendulum balanced upright. It presents a real-time test of stabilization techniques, as it is inherently unstable and requires continuous feedback and adjustments to maintain equilibrium. The problem is widely used to demonstrate principles of linear and nonlinear control theory, including PID control and state space representation techniques.
+The Rotary Inverted Pendulum (RIP) problem is a popular control theory project, and it exemplifies a classic challenge in dynamic systems and control engineering. This system, also known as the Furuta Pendulum, involves a pendulum attached to the end of a rotating arm, where the primary goal is to control the arm's rotation to keep the pendulum balanced upright. It presents a real-time test of stabilization techniques, as it is inherently unstable and requires continuous feedback and adjustments to maintain equilibrium. The problem is widely used to demonstrate principles of linear and nonlinear control theory, including PID control and state space representation techniques.
 
 ### Developing the dynamic model
 
@@ -22,27 +22,29 @@ First step for designing any controller is writing the equations of motion that 
 
 We write the equations of motion as:
 
-$$ J_{pend} \ddot \theta + mgr\ sin(\theta) - mLr\ sin(\alpha-\theta)\dot \alpha^2 + mLr\ cos(\alpha - \theta)\ddot \theta + mr^2\ddot \theta = 0$$
+<!-- $$ J_{pend} \ddot \theta + mgr\ sin(\theta) - mLr\ sin(\alpha - \theta)\dot \alpha^2 + mLr\ cos(\alpha - \theta)\ddot \theta + mr^2\ddot \theta = 0$$
 
-$$J_{arm} \ddot \alpha + mL^2\ddot \alpha + mLr\ sin(\alpha - \theta)\dot \theta^2 + mLr\ cos(\alpha - \theta)\ddot \theta = 0   $$
+$$J_{arm} \ddot \alpha + mL^2\ddot \alpha + mLr\ sin(\alpha - \theta)\dot \theta^2 + mLr\ cos(\alpha - \theta)\ddot \theta = 0   $$ -->
 
-Here, $\theta$ is the angle of the pendulum from the vertical axis, $\alpha$ is the angle of the arm from the horizontal axis, $L$ is the length of the pendulum, $m$ is the mass of the pendulum, $r$ is the distance of the pivot point from the center of mass of the pendulum, $J_{pend}$ is the moment of inertia of the pendulum about its center of mass and $J_{arm}$ is the moment of inertia of the arm.
+$$ (mL_r^2 + \frac{1}{4}mL_p^2 - \frac{1}{4}mL_p^2\ cos(\alpha)^2 + J_r)\ddot \theta - \frac{1}{2}mL_pL_r\ cos(\alpha)\ddot \alpha + \frac{1}{2}mL_pL_r\ sin(\alpha)\dot \alpha^2 = \tau - D_r\dot \theta $$
+
+$$ -\frac{1}{2}mL_pL_r\ cos(\alpha)\ddot \theta - (J_p + \frac{1}{4}mL_p^2)\ddot \alpha - \frac{1}{4}mL_p^2\ sin(\alpha)\cos(\alpha)\dot\theta^2 - \frac{1}{2}mL_pg\ sin(\alpha) = D_p\dot\alpha $$
+
+Here, $\theta$ is the angle of the pendulum from the vertical axis, $\alpha$ is the angle of the arm from the horizontal axis, $L_r$ is the length of the arm, $L_p$ is the length of the pendulum, $m$ is the mass of the pendulum, $r$ is the distance of the pivot point from the center of mass of the pendulum, $J_p$ is the moment of inertia of the pendulum about its center of mass and $J_r$ is the moment of inertia of the arm. Additionally, we have $D_p$ and $D_r$ ,which are the damping coefficients of the pendulum and arm respectively.
 
 ### Linearization
 
 Next, we linearize the system of equations. In our case, we want the pendulum to stay upright, so that would mean $\theta = \pi$ and additionally, we want $\alpha = 0$. Based on these conditions the linearized equations of motion would be:
 
-For $\theta$:
-$$J_{pend}\ddot \theta + gmr(\theta - \pi) + mr^2\ddot \theta = 0$$
+$$(mL_r^2 +  J_r)\ddot \theta - \frac{1}{2}mL_pL_r\ddot \alpha = \tau - D_r\dot\theta$$
 
-For $\alpha$:
-$$J_{arm}\ddot \alpha + L^2m\ddot \alpha - mLr(\alpha - \theta + \pi)\ddot \theta = 0 $$
+$$ -\frac{1}{2}mL_pL_r\ddot\theta +(J_p + \frac{1}{4}mL_p^2)\ddot\alpha - \frac{1}{2}mL_pg\alpha= D_p\dot\alpha $$
 
 ### Designing the PID controller
 
 PID control is a very straightforward approach to the problem, which works by adjusting the control output based on the proportional, integral and derivative terms of the error signal. It is a good way to quickly get the project off the ground and test basic functionality, and will provide sufficiently good results with relatively less effort. The most tedious part of this method is tuning the controller gains, and there are several methods to do this, including Ziegler-Nichols and Cohen-Coon.
 
-Because we have two control inputs, $\theta$ and $\alpha$, we need two PID controllers, $c_{\theta}$ and $c_{\alpha}$.
+Because we have two control inputs, $\theta$ and $\alpha$, we need two PID controllers, $c_{\theta}$ and $c_{\alpha}$. The transfer functions for these two controllers can be derived from the 
 
 The general form of the transfer function for these controllers would be:
 
@@ -50,14 +52,59 @@ $$C(s) = K_p + \frac{K_i}{s} + K_ds$$
 
 Once we have good enough values for the controller gains, we now have a controller that can maintain the system at equilibrium.
 
-<center><img src="/img/pid_small.gif" alt="RIP" height="400" width="400"></center> 
+<center><img src="/img/pid_small.gif" alt="RIP" height="400" width="400"></center>
+<br>
 
 ### Designing a state space controller
 
-### PID vs state space controller
+A PID controller is good enough to begin with, but as we notice, it cannot handle large errors, and the system is immediately thrown in awry.
+
+<center><img src="/img/pid_large.gif" alt="RIP" height="400" width="400"></center>
+<br>
+
+This is mainly due to two factors:
+
+1. PID controllers are inherently linear. They are designed to perform well around a tiny operating range, in a very small region around the equilibrium point at which we have linearized the system. An RIP exhibits highly nonlinear dynamics, especially as the error becomes large, and the dynamics can no longer be approximated as linear, and this throws the controller into discord.
+
+2. PID controllers can only be used for Single Input Single Output (SISO) systems. In our case, we have chosen only one state to monitor, and that is the angle of the pendulum, $\theta$. To better control the system, we must also ensure the angle of the arm, $\alpha$ be maintained.
+
+A state space controller solves these issues. It can handle Multiple Input Multiple Output (MIMO) systems and it has a wider range of operating conditions around the equilibrium point.
+
+Designing a state space controller requires some more steps after linearization.
+
+First we write the state equations
+
+$$\dot X = Ax+Bu$$ $$Y = Cx + Du$$
+
+where $X = \begin{bmatrix}\theta\\\alpha\\\dot\theta\\\dot\alpha \end{bmatrix}$ and $Y = \begin{bmatrix} \theta \\ \alpha \end{bmatrix}$.
+
+Now we find the matrices $A$, $B$, $C$ and $D$. This is done by first finding $\ddot \theta$ and $\ddot \alpha$ in terms of the physical parameters of the system and then converting the linearized equations into the state space formulation. 
+
+$$A = \frac{1}{J_T}\begin{bmatrix} 
+0&0&1&0
+\\0&0&0&1
+\\0 & \frac{1}{4}m^2L_p^2L_rg & -(J_p+\frac{1}{4}mL_p^2)D_r & -\frac{1}{2}mL_pL_rD_p
+\\0 &\frac{1}{2}mL_pg(J_r +mL_r^2) & \frac{1}{2}mL_pL_rD_r & (J_r + m_pL_r^2)D_p 
+\end{bmatrix}$$
+
+$$B = \frac{1}{J_pmL_r^2+J_rJ_p+\frac{1}{4}J_rmL_p^2}
+\begin{bmatrix}
+0\\0\\J_p + \frac{1}{4}mL_p^2\\\frac{1}{4}mL_pL_r
+\end{bmatrix}$$
+
+$$C = \begin{bmatrix}
+1&0&0&0 \\ 0&1&0&0
+\end{bmatrix}$$
+
+$$D = \begin{bmatrix} 0\\0\end{bmatrix}$$
+
+Once we have these matrices, we simply plug these values into pre-existing libraries such as the ones in MATLAB-Simulink to design the state space controller. With this controller, we see the performance of the RIP to have improved, even with a large error.
+
+<center><img src="/img/state_space_large.gif" alt="RIP" height="400" width="400"></center>
+<br>
 
 ### Final thoughts
 
-State space controllers are not the end of the road. There are superior ways to handle the errors and maintain equlibrium, including optimization-based approaches like the LQR method, which optimizes system performance by minimizing a predefined cost function.
+State space controllers are not the end of the road. There are superior methods to handle the errors and maintain equlibrium, including optimization-based approaches such as LQR method, which optimizes system performance by minimizing a predefined cost function.
 
-[github repo](https://github.com/ashwath-karthikeyan/rotary-inverted-pendulum.git)
+[Follow this link to the github repo.](https://github.com/ashwath-karthikeyan/rotary-inverted-pendulum.git)

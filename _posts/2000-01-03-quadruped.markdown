@@ -8,6 +8,9 @@ tags:   [Control, Planning, Perception, SLAM]
 ---
 ## Quadruped Robot Simulation in ROS-Gazebo
 
-![robot dog](../img/quadruped.png)
+<center><img src="/img/quadruped.png" alt="Robot Dog" height="400" width="400"></center>
+<br>
+
+documentation coming soon
 
 [github repo](https://github.com/ashwath-karthikeyan/quadruped-robot.git)

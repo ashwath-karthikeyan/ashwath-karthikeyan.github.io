@@ -8,6 +8,14 @@ tags:   [Planning]
 ---
 ## Probabilistic Planning Algorithms
 
-![Profile Pic](../img/rrt.png)
+### Randomly Sampled Control Inputs
+
+### PRM
+
+### RRT
+<center><img src="/img/rrt.png" alt="RRT" height="400" width="400"></center>
+<br>
+
+documentation coming soon
 
 [github repo](https://github.com/ashwath-karthikeyan/sampling-based-planning.git)

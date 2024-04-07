@@ -8,6 +8,9 @@ tags:   [Autonomous Vehicles, Planning, Perception]
 ---
 ## Implemented Lane Adherence in an Autonomous Vehicle.
 
-![lane fit](../img/lane_fit.png)
+<center><img src="/img/lane_fit.png" alt="Lane Fit" height="400" width="400"></center>
+<br>
+
+documentation coming soon
 
 [github repo](https://github.com/ashwath-karthikeyan/lane-adherence.git)
