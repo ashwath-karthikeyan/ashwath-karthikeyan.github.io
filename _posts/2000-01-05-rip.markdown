@@ -57,9 +57,9 @@ Once we have good enough values for the controller gains, we now have a controll
 
 ### Designing the state space controller
 
-A PID controller is good enough to begin with, but as we notice, it cannot handle large errors, and the system is immediately thrown in awry.
+A PID controller is good enough to begin with, but as we notice, it cannot handle large errors, and the system immediately goes awry.
 
-<center><img src="/img/pid_large.gif" alt="RIP" height="400" width="400"></center>
+<center><img src="/img/pid_big.gif" alt="RIP" height="400" width="400"></center>
 <br>
 
 This is mainly due to two factors:
@@ -72,15 +72,13 @@ A state space controller solves these issues. It can handle Multiple Input Multi
 
 Designing a state space controller requires some more steps after linearization.
 
-First we write the state equations
+First we write the state equations 
 
-$$\dot X = Ax+Bu$$ 
+$$\dot X = Ax+Bu$$
+
 $$Y = Cx + Du$$
 
-where 
-$$X = \begin{bmatrix}{\theta}\\{\alpha}\\{\dot\theta}\\{\dot\alpha} \end{bmatrix}$$ 
-
-and $$Y = \begin{bmatrix} \theta \\ \alpha \end{bmatrix}$$.
+where $X = \begin{bmatrix}{\theta}\\{\alpha}\\{\dot\theta}\\{\dot\alpha} \end{bmatrix}$ and $Y = \begin{bmatrix} \theta \\ \alpha \end{bmatrix}$.
 
 Now we find the matrices $A$, $B$, $C$ and $D$. This is done by first finding $\ddot \theta$ and $\ddot \alpha$ in terms of the physical parameters of the system and then converting the linearized equations into the state space formulation. 
 
@@ -109,6 +107,6 @@ Once we have these matrices, we simply plug these values into pre-existing libra
 
 ### Final thoughts
 
-State space controllers are not the end of the road. There are superior methods to handle the errors and maintain equlibrium, including optimization-based approaches such as LQR method, which optimizes system performance by minimizing a predefined cost function.
+State space controllers represent a significant step in control systems, yet they are not the pinnacle of error management and equilibrium maintenance. Advanced methods, including optimization-based strategies like the Linear Quadratic Regulator (LQR), enhance system performance through the minimization of a predetermined cost function. Beyond LQR, approaches like Model Predictive Control (MPC) offer further sophistication by anticipating future states and making adjustments accordingly. Additionally, adaptive control methods adjust to system changes in real-time, ensuring optimal performance under varying conditions. These methodologies extend the capabilities of traditional controllers, offering improved precision and adaptability.
 
-[Follow this link to the github repo.](https://github.com/ashwath-karthikeyan/rotary-inverted-pendulum.git)
+[Follow this link to the github repo for implementation.](https://github.com/ashwath-karthikeyan/rotary-inverted-pendulum.git)
