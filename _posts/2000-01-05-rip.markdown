@@ -78,7 +78,9 @@ $$\dot X = Ax+Bu$$
 
 $$Y = Cx + Du$$
 
-where $X = \begin{bmatrix}\theta\\\alpha\\\dot\theta\\\dot\alpha \end{bmatrix}$ and $Y = \begin{bmatrix} \theta \\ \alpha \end{bmatrix}$.
+$$X = \begin{bmatrix}\theta\\\alpha\\\dot\theta\\\dot\alpha \end{bmatrix}$$
+
+$$Y = \begin{bmatrix} \theta \\ \alpha \end{bmatrix}$$
 
 Now we find the matrices $A$, $B$, $C$ and $D$. This is done by first finding $\ddot \theta$ and $\ddot \alpha$ in terms of the physical parameters of the system and then converting the linearized equations into the state space formulation. 
 
