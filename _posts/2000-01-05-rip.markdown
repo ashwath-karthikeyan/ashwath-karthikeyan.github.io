@@ -55,7 +55,7 @@ Once we have good enough values for the controller gains, we now have a controll
 <center><img src="/img/pid_small.gif" alt="RIP" height="400" width="400"></center>
 <br>
 
-### Designing a state space controller
+### Designing the state space controller
 
 A PID controller is good enough to begin with, but as we notice, it cannot handle large errors, and the system is immediately thrown in awry.
 
@@ -74,9 +74,13 @@ Designing a state space controller requires some more steps after linearization.
 
 First we write the state equations
 
-$$\dot X = Ax+Bu$$ $$Y = Cx + Du$$
+$$\dot X = Ax+Bu$$ 
+$$Y = Cx + Du$$
 
-where $X = \begin{bmatrix}\theta\\\alpha\\\dot\theta\\\dot\alpha \end{bmatrix}$ and $Y = \begin{bmatrix} \theta \\ \alpha \end{bmatrix}$.
+where 
+$$X = \begin{bmatrix}{\theta}\\{\alpha}\\{\dot\theta}\\{\dot\alpha} \end{bmatrix}$$ 
+
+and $$Y = \begin{bmatrix} \theta \\ \alpha \end{bmatrix}$$.
 
 Now we find the matrices $A$, $B$, $C$ and $D$. This is done by first finding $\ddot \theta$ and $\ddot \alpha$ in terms of the physical parameters of the system and then converting the linearized equations into the state space formulation. 
 
@@ -100,7 +104,7 @@ $$D = \begin{bmatrix} 0\\0\end{bmatrix}$$
 
 Once we have these matrices, we simply plug these values into pre-existing libraries such as the ones in MATLAB-Simulink to design the state space controller. With this controller, we see the performance of the RIP to have improved, even with a large error.
 
-<center><img src="/img/state_space_large.gif" alt="RIP" height="400" width="400"></center>
+<center><img src="/img/state_big.gif" alt="RIP" height="400" width="400"></center>
 <br>
 
 ### Final thoughts
