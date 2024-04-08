@@ -44,7 +44,7 @@ $$ -\frac{1}{2}mL_pL_r\ddot\theta +(J_p + \frac{1}{4}mL_p^2)\ddot\alpha - \frac{
 
 PID control is a very straightforward approach to the problem, which works by adjusting the control output based on the proportional, integral and derivative terms of the error signal. It is a good way to quickly get the project off the ground and test basic functionality, and will provide sufficiently good results with relatively less effort. The most tedious part of this method is tuning the controller gains, and there are several methods to do this, including Ziegler-Nichols and Cohen-Coon.
 
-Because we have two control inputs, $\theta$ and $\alpha$, we need two PID controllers, $c_{\theta}$ and $c_{\alpha}$. The transfer functions for these two controllers can be derived from the 
+Because we have two control inputs, $\theta$ and $\alpha$, we need two PID controllers, $c_{\theta}$ and $c_{\alpha}$. The transfer functions for these two controllers can be derived from the linearized equations.
 
 The general form of the transfer function for these controllers would be:
 
