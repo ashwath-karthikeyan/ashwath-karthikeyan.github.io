@@ -211,3 +211,8 @@ table td {
 table tr:hover {
   background-color: $white;
 }
+
+.MathJax { 
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
+}
