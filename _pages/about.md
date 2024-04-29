@@ -7,7 +7,7 @@ permalink: /about/
 
 ## Welcome to my profile
 
-<center><img src="/img/profile_pic.jpg" alt="profile_pic" height="400" width="400"></center>
+<center><img src="/img/profile_pic(2).jpg" alt="profile_pic" height="400" width="400"></center>
 <br> 
 
 #### Hey there! I'm Ashwath Karthikeyan.
