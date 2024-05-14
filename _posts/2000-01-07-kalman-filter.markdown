@@ -30,9 +30,9 @@ The issue is that we do not have a direct reading of its state space. Instead we
 
 However, on testing, we find out that there are errors in the dynamics model. This is to be expected, since Dubins Car is only a theoretical model of a real vehicle's dynamics, and theory will only take you so far. The results of testing give us that:
 
-1. The acceleration $a$ has an error of magnitude $|a| \cdot \sigma_a$, where $\sigma_a$ is the standard deviation of the error.
+* The acceleration $a$ has an error of magnitude $|a| \cdot \sigma_a$, where $\sigma_a$ is the standard deviation of the error.
 
-2. There is also an error in the heading, $\theta$ due to wear in the tire and steering system faults, which results in the change in the steering angle $\phi$ not being translated into a change in heading as expected, and this is further pronounced at high velocities. The error seems to be form of $\dot \theta = |v| \cdot \sigma_\theta$
+* There is also an error in the heading, $\theta$ due to wear in the tire and steering system faults, which results in the change in the steering angle $\phi$ not being translated into a change in heading as expected, and this is further pronounced at high velocities. The error seems to be form of $\dot \theta = |v| \cdot \sigma_\theta$
 
 3. 
 
