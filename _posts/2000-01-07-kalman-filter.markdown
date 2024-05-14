@@ -28,11 +28,11 @@ $$u = \begin{bmatrix}a \\ \psi \end{bmatrix}.$$
 
 The issue is that we do not have a direct reading of its state space. Instead we have sensors that can calculate its forward velocity $v$, the heading rate $\dot \theta$, and the global coordinates $(g_x, g_y)$ from a GPS sensor, with the GPS sensor located at point $(g_x^{ref}, g_y^{ref})$ in the robot's reference frame.
 
-However, on testing, we find out that there are errors in the dynamics model. This is to be expected, since Dubins Car is only a theoretical model of a real vehicle's dynamics, and theory will only take you so far. The results of testing give us that 
+However, on testing, we find out that there are errors in the dynamics model. This is to be expected, since Dubins Car is only a theoretical model of a real vehicle's dynamics, and theory will only take you so far. 
 
-The acceleration $a$ has an error of magnitude $|a| \cdot \sigma_a$, where $\sigma_a$ is the standard deviation of the error.
+The results of testing give us that the acceleration $a$ has an error of magnitude $a \cdot \sigma_a$, where $\sigma_a$ is the standard deviation of the error.
 
-There is also an error in the heading, $\theta$ due to wear in the tire and steering system faults, which results in the change in the steering angle $\phi$ not being translated into a change in heading as expected, and this is further pronounced at high velocities. The error seems to be form of $\dot \theta = |v| \cdot \sigma_\theta$
+There is also an error in the heading, $\theta$ due to wear in the tire and steering system faults, which results in the change in the steering angle $\phi$ not being translated into a change in heading as expected, and this is further pronounced at high velocities. The error seems to be form of $\dot \theta = v \cdot \sigma_\theta$
  
 
 Additionally, there are also errors in the sensor values.
