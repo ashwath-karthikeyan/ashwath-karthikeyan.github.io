@@ -8,13 +8,17 @@ tags:   [State Estimation, Control]
 ---
 ## State Estimation with Extended Kalman Filter
 
-State estimation is an important topic in various fields like robotics and aerospace, where a lot of the state information is not readily available from sensors and the measurements are very noisy. For example, we would love to know the robot's $[x,y,\theta]$ values in the local frame so we can easily control its motion. But usually, we do not have the sensors that can directly measure these values and inevitably, the readings are too erroneous to use as such.
+State estimation is an important technique, used in fields such as robotics and aerospace where true system states are often obscured or indirectly observed through noisy sensors. Techniques like the Extended Kalman Filter (EKF) are employed to infer these hidden states. EKF extends the basic concept of a Kalman Filter to nonlinear systems by linearizing around the current estimate at each timestep.
 
-State estimation techniques like Extended Kalman Filtering (EKF) use predefined mathematical models of the system and with known relationships between the measured value and the required quantities to accurately predict over time the actual state of the system. These techniques also account for noise in the measurements (noise must be Gaussian in Kalman Filters) and errors in the system model.
+In EKF, the process begins with a prediction step using a predefined mathematical model of the system dynamics, which estimates the state forward in time. This model is typically represented as a program of differential equations.
 
-#### Our Problem
+Then, the update step adjusts this prediction based on new sensor measurements. The relationship between the measured values and the system states is defined by a measurement model, which like the system model, can be nonlinear and is linearized in the context of EKF.
 
-Let us now imagine that we have an autonomous vehicle, defined with the help of the Dubins Car Model. This can be written as a system with a state vector given by
+Both the system and measurement models are subject to uncertainties. EKF addresses this by assuming that both the process and measurement noises are Gaussian, which simplifies the computation of the Kalman gain—a factor that determines the weighting of the new measurement relative to the prediction.
+
+#### Problem statement
+
+Let us now imagine that we have an autonomous vehicle, represented by the Dubins Car Model. This can be written as a system with a state vector given by
 
 $$x = \begin{bmatrix}p_x \\p_y\\ \theta \\ v \\ \phi \end{bmatrix}$$
 
@@ -26,18 +30,35 @@ We want to control the car's motion in its configuration space with the help of 
 
 $$u = \begin{bmatrix}a \\ \psi \end{bmatrix}.$$
 
-The issue is that we do not have a direct reading of its state space. Instead we have sensors that can calculate its forward velocity $v$, the heading rate $\dot \theta$, and the global coordinates $(g_x, g_y)$ from a GPS sensor, with the GPS sensor located at point $(g_x^{ref}, g_y^{ref})$ in the robot's reference frame.
+<center><img src="/img/dubbin.png" alt="dubbin" height="400" width="400"></center>
+<br>
+
+The issue is that we do not have a direct reading of its state space. Instead we have a GPS sensor that can calculate the car's forward velocity $v$, the heading rate $\dot \theta$, and the global coordinates $(g_x, g_y)$. The GPS sensor is located at point $(g_x^{ref}, g_y^{ref})$ in the ego frame.
 
 However, on testing, we find out that there are errors in the dynamics model. This is to be expected, since Dubins Car is only a theoretical model of a real vehicle's dynamics, and theory will only take you so far. 
 
-The results of testing give us that the acceleration $a$ has an error of magnitude $\mid a \mid \cdot \sigma_a$, where $\sigma_a$ is the standard deviation of the error.
+The results of testing give us reason to believe that 
 
-There is also an error in the heading, $\theta$ due to wear in the tire and steering system faults, which results in the change in the steering angle $\phi$ not being translated into a change in heading as expected, and this is further pronounced at high velocities. The error seems to be form of $\dot \theta = \lvert v \rvert \cdot \sigma_\theta$
- 
+1. Due to physical issues with the acceleration pedal, the set acceleration $a$ has an error of standard deviation $\lvert a \rvert \cdot \sigma_a$.
 
-Additionally, there are also errors in the sensor values.
+2. There is an error in the steering angle, $\phi$, causing the heading $\theta$ to deviate, especially at high speeds. This error has the standard deviation $\lvert v \rvert \cdot \sigma_\theta$.
+
+3. The vehicle's position slips occassionally, and the velocity error in the forward direction is estimated to have a standard deviation $\lvert v \rvert \cdot \sigma_{fwd}$ and the error in the sideways direction has an SD of $ \lvert v \rvert \cdot \ \sigma_{side}$.
+
+We also discover during testing that there are noises in the GPS sensor's observation
+
+1. The magnitude of error in velocity increases with velocity, and the standard deviation is given by $\lvert v \rvert \cdot \sigma_v$.
+
+2. Heading rate measurement has errors with SD $\sigma _{\dot \theta}$
+
+3. Both $x$ and $y$ direction readings have errors with SD $\sigma_g$
 
 
+#### Solving the Problem
+
+Let's now see how we can solve this
+
+##### 
 
 <center><img src="/img/ekf.png" alt="EKF" height="400" width="400"></center>
 <br>
