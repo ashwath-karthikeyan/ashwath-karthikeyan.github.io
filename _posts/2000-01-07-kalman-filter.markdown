@@ -8,17 +8,13 @@ tags:   [State Estimation, Control]
 ---
 ## State Estimation with Extended Kalman Filter
 
-State estimation is an important technique, used in fields such as robotics and aerospace where true system states are often obscured or indirectly observed through noisy sensors. Techniques like the Extended Kalman Filter (EKF) are employed to infer these hidden states. EKF extends the basic concept of a Kalman Filter to nonlinear systems by linearizing around the current estimate at each timestep.
+State estimation is an important technique used in fields such as robotics and aerospace, where true system states are often obscured or indirectly observed through noisy sensors. Techniques like Extended Kalman Filter (EKF) are employed to infer these hidden states by making use of mathematical models and measurements. 
 
-In EKF, the process begins with a prediction step using a predefined mathematical model of the system dynamics, which estimates the state forward in time. This model is typically represented as a program of differential equations.
-
-Then, the update step adjusts this prediction based on new sensor measurements. The relationship between the measured values and the system states is defined by a measurement model, which like the system model, can be nonlinear and is linearized in the context of EKF.
-
-Both the system and measurement models are subject to uncertainties. EKF addresses this by assuming that both the process and measurement noises are Gaussian, which simplifies the computation of the Kalman gain—a factor that determines the weighting of the new measurement relative to the prediction.
+EKF helps to combine predictions about the system's behavior, which are based on its dynamics, with actual noisy sensor readings. By continually updating its estimates with new sensor data, EKF adjusts for uncertainties and errors, refining its predictions over time. This process allows the system to maintain accurate and reliable information about its state, which is essential for tasks like navigation, control, and decision-making, ensuring that the system operates effectively even in the presence of unpredictable factors.
 
 #### Problem statement
 
-Let us now imagine that we have an autonomous vehicle, represented by the Dubins Car Model. This can be written as a system with a state vector given by
+Let's now imagine that we have an autonomous vehicle, represented by the Dubins Car Model. This can be written as a system with a state vector given by
 
 $$x = \begin{bmatrix}p_x \\p_y\\ \theta \\ v \\ \phi \end{bmatrix}$$
 
@@ -33,7 +29,9 @@ $$u = \begin{bmatrix}a \\ \psi \end{bmatrix}.$$
 <center><img src="/img/dubbin.png" alt="dubbin" height="400" width="400"></center>
 <br>
 
-The issue is that we do not have a direct reading of its state space. Instead we have a GPS sensor that can calculate the car's forward velocity $v$, the heading rate $\dot \theta$, and the global coordinates $(g_x, g_y)$. The GPS sensor is located at point $(g_x^{ref}, g_y^{ref})$ in the ego frame.
+The issue is that we do not have a direct reading of its state space. Instead we have a GPS sensor that can calculate the car's forward velocity $v$, the heading rate $\dot \theta$, and the global coordinates $(g_x, g_y)$. The GPS sensor is located at point $(g_x^{ref}, g_y^{ref})$ in the ego frame. Thus, the measurement vector can we written as 
+
+$$ z = \begin{bmatrix}v\\\dot\theta\\g_x\\g_y \end{bmatrix}$$
 
 However, on testing, we find out that there are errors in the dynamics model. This is to be expected, since Dubins Car is only a theoretical model of a real vehicle's dynamics, and theory will only take you so far. 
 
@@ -53,12 +51,57 @@ We also discover during testing that there are noises in the GPS sensor's observ
 
 3. Both $x$ and $y$ direction readings have errors with SD $\sigma_g$
 
-
 #### Solving the Problem
 
-Let's now see how we can solve this
+Let's now see how we can solve this problem with the help of an EKF.
 
-##### 
+In EKF, the process begins with a prediction step using a predefined mathematical model of the system dynamics, which estimates the state forward in time. This model is typically represented as a program of differential equations.
+
+Then, the update step adjusts this prediction based on new sensor measurements. The relationship between the measured values and the system states is defined by a measurement model, which like the system model, can be nonlinear and is linearized in the context of EKF.
+
+Both the system and measurement models are subject to uncertainties. EKF addresses this by assuming that both the process and measurement noises are Gaussian, which simplifies the computation of the Kalman gain—a factor that determines the weighting of the new measurement relative to the prediction.
+
+##### Building the model
+
+The first step is to gather and understand all the components that are required to make the process work smoothly.
+
+First, our state vector, $x$, given to be 
+
+$$x = \begin{bmatrix}p_x \\p_y\\ \theta \\ v \\ \phi \end{bmatrix}$$
+
+Next our transition vector, $f$, also given
+
+$$f(x) = \begin{bmatrix} v\ cos(\theta) \\v\ sin(\theta)\\\frac{v}{L}tan(\phi)\\a\\ \psi\end{bmatrix}$$
+
+Our control vector, $u$,
+
+$$u = \begin{bmatrix}a \\ \psi \end{bmatrix}$$
+
+And finally our measurement function, $h(x)$ which is a mapping from the state space to the measurement space. We know the measurement vector is 
+
+$$z = \begin{bmatrix}v\\\dot\theta\\g_x\\g_y \end{bmatrix}$$
+
+We are also told that the GPS sensor is at $(g_x^{ref}, g_y^{ref})$ on the robot, but we know that to transform a point from one frame to other, we have to rotate and translate it.
+
+$$ \begin{bmatrix}g_x\\g_y \end{bmatrix} = R(\theta)\begin{bmatrix} g_x^{ref} \\g_y^{ref}\end{bmatrix} +\begin{bmatrix} p_x\\p_y \end{bmatrix} $$
+
+But 
+
+$$R(\theta) =\begin{bmatrix} cos(\theta) &-sin(\theta) \\sin(\theta)&cos(\theta)\end{bmatrix}$$
+
+So, by further calculation we get :
+
+$$\begin{bmatrix} g_x \\g_y\end{bmatrix} = \begin{bmatrix} cos(\theta) &-sin(\theta) \\sin(\theta)&cos(\theta)\end{bmatrix}\begin{bmatrix} g_x^{ref} \\g_y^{ref}\end{bmatrix}+ \begin{bmatrix} p_x\\p_y \end{bmatrix}$$
+
+$$= \begin{bmatrix} p_x + g_{x}^{ref}cos(\theta) - g_{y}^{ref}sin(\theta) \\p_y+g_{y}^{ref}cos(\theta) + g_{x}^{ref}sin(\theta)\end{bmatrix}$$
+
+Therefore, by substituting it into the original $z$ vector we get
+
+$$ h(x) = \begin{bmatrix} v \\\frac{v}{L} tan(\phi)\\p_x + g_{x}^{ref}cos(\theta) - g_{y}^{ref}sin(\theta) \\p_y+g_{y}^{ref}cos(\theta) + g_{x}^{ref}sin(\theta)\end{bmatrix}$$
+
+##### Linearizing the model
+
+The first step of solving this is to linearize the model we've been given to be able to plug the various matrices into an EKF. This is done to ...
 
 <center><img src="/img/ekf.png" alt="EKF" height="400" width="400"></center>
 <br>
