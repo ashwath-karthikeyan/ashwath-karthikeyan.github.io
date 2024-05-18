@@ -138,11 +138,15 @@ $$\Sigma_{z,t} = diag\begin{bmatrix} (\sigma_v.|v|)^2, (\sigma_{\dot \theta})^2,
 
 Now that we have all the components required for the EKF, let's see how it works in detail.
 
+###### Step 1 : Initialization
 
+###### Step 2 : Prediction
+
+###### Step 3 : Update
 
 <center><img src="/img/kalman.jpg" alt="matlab" width="400"></center>
 
-<center style="font-size: 9px;"> Image Credits: <a href="https://www.mathworks.com/videos/series/understanding-kalman-filters.html">mathworks.com</a> </center>
+<center style="font-size: 10px;"> Image Credits: <a href="https://www.mathworks.com/videos/series/understanding-kalman-filters.html">mathworks.com</a> </center>
 
 <center><img src="/img/ekf.png" alt="EKF" height="400" width="400"></center>
 <br>
