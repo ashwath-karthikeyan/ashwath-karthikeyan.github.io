@@ -142,9 +142,9 @@ Now that we have all the components required for the EKF, let's see how it works
 
 <center><img src="/img/kalman.jpg" alt="matlab" width="400"></center>
 
-<center> Image Credits: <a href="https://www.mathworks.com/videos/series/understanding-kalman-filters.html">mathworks.com</a> </center>
+<center "font-size: 9px;"> Image Credits: <a href="https://www.mathworks.com/videos/series/understanding-kalman-filters.html">mathworks.com</a> </center>
 
-<center "font-size: 9px;"><img src="/img/ekf.png" alt="EKF" height="400" width="400"></center>
+<center><img src="/img/ekf.png" alt="EKF" height="400" width="400"></center>
 <br>
 
 [github repo](https://github.com/ashwath-karthikeyan/kalman-filter.git)
