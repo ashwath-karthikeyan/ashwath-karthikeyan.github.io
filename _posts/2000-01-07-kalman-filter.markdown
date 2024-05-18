@@ -128,7 +128,7 @@ $$H_t = \begin{bmatrix}
 \Delta t & 0 & -g_{x}^{ref}sin(\theta) - g_{y}^{ref}cos(\theta) &0&0\\0 & \Delta t & g_{x}^{ref}cos(\theta) - g_{y}^{ref}sin(\theta) &0&0
 \end{bmatrix}$$
 
-Additionally, we require the two covariance matrices, one for the inaccuracies of the system model, $\Sigma_{x,t}$ and one for the errors in the sensor observations, $\Sigma_{z,t}$. These let the EKF know how much or how less it can trust the system model and the sensor observations, and can be calculated from the problem statement, based on the standard deviations given.
+Finally, we require the two covariance matrices, one for the inaccuracies of the system model, $\Sigma_{x,t}$ and one for the errors in the sensor observations, $\Sigma_{z,t}$. These matrices let the EKF know how much or how less it can trust the system model and the sensor observations, and can be calculated from the problem statement, based on the standard deviations given.
 
 $$\Sigma_{x,t} = diag\begin{bmatrix}(\sigma_{fwd}.|v|)^2, (\sigma_{side}.|v|)^2, (\sigma_{\theta}.|v|)^2,(\sigma_a.|a|)^2,0 \end{bmatrix}$$
 
@@ -136,9 +136,15 @@ $$\Sigma_{z,t} = diag\begin{bmatrix} (\sigma_v.|v|)^2, (\sigma_{\dot \theta})^2,
 
 ##### Plugging into EKF algorithm
 
-Now that we have all the components required for the EKF, let's see how it works.
+Now that we have all the components required for the EKF, let's see how it works in detail.
 
-<center><img src="/img/ekf.png" alt="EKF" height="400" width="400"></center>
+
+
+<center><img src="/img/kalman.jpg" alt="matlab" width="400"></center>
+
+<center> Image Credits: <a href="https://www.mathworks.com/videos/series/understanding-kalman-filters.html">mathworks.com</a> </center>
+
+<center "font-size: 9px;"><img src="/img/ekf.png" alt="EKF" height="400" width="400"></center>
 <br>
 
 [github repo](https://github.com/ashwath-karthikeyan/kalman-filter.git)
