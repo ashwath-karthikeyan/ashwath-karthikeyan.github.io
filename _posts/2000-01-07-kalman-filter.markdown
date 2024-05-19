@@ -29,7 +29,7 @@ $$u = \begin{bmatrix}a \\ \psi \end{bmatrix}.$$
 <center><img src="/img/dubbin.png" alt="dubbin" height="400" width="400"></center>
 <br>
 
-$(p_x,p_y)$ is the position of the robot in the start frame, the heading, $\theta$, is the angle it makes with the horizontal axis of the start frame, $v$ and $a$ are the velocity and acceleration respectively, of the robot in the direction of movement. $\phi$ is the steering angle, which is the angle the wheels make with the rest of the vehicle, and $L$ is the turn radius, which is also the distance between the front and rear axles of the robot.
+Here, $(p_x,p_y)$ is the position of the robot in the start frame, the heading, $\theta$, is the angle it makes with the horizontal axis of the start frame, $v$ and $a$ are the velocity and acceleration respectively, of the robot in the direction of movement. $\phi$ is the steering angle, which is the angle the wheels make with the rest of the vehicle, and $L$ is the turn radius, which is also the distance between the front and rear axles of the robot.
  
 The issue is that we do not have a direct reading of its state space. Instead we have a GPS sensor that can calculate the car's forward velocity $v$, the heading rate $\dot \theta$, and the global coordinates $(g_x, g_y)$. The GPS sensor is located at point $(g_x^{ref}, g_y^{ref})$ in the robot's start frame. Thus, the measurement vector can we written as 
 
@@ -109,7 +109,7 @@ The next step is to linearize the given model. This is necessary because an EKF,
 
 To linearize the model, we find the Jacobians of the vectors we gathered before. To do that we need to find the partial derivatives
 
-$$F_t = \frac{\partial f}{\partial x} , g_t = \frac{\partial f}{\partial u}, H_t = \frac{\partial h}{\partial x}$$
+$$F_t = \frac{\partial f}{\partial x};\ g_t = \frac{\partial f}{\partial u};\ H_t = \frac{\partial h}{\partial x}$$
 
 By calculating these, we get 
 
@@ -136,17 +136,54 @@ $$\Sigma_{z,t} = diag\begin{bmatrix} (\sigma_v.|v|)^2, (\sigma_{\dot \theta})^2,
 
 ##### Plugging into EKF algorithm
 
-Now that we have all the components required for the EKF, let's see how it works in detail.
+Now that we have all the components required for the EKF, let's see how the algorithm works in detail.
 
 ###### Step 1 : Initialization
 
+* When the algorithm is started, initialize the state vector $x$ with the initial estimates of the state variables. This would be the first line of the `dataset/controls_observations1.txt` file.
+
+* Initialize the error covariance matrix $P_{t=0}$. The elements of the matrix are given to us in the [problem statement](github.com/ashwath-karthikeyan/kalman-filter).
+
 ###### Step 2 : Prediction
+
+* Predict the state using the Dubins Car model: $$\dot x = f(x,u)$$
+
+* Calculate Jacobian of the state transition model: $$F_t = \frac{\partial f}{\partial x}$$
+
+* Calculate Jacobian of the control input model: $$g_t = \frac{\partial f}{\partial u}$$
+
+* Define the process noise covariance as above: $$\Sigma_{x,t} = diag\begin{bmatrix}(\sigma_{fwd}.|v|)^2, (\sigma_{side}.|v|)^2, (\sigma_{\theta}.|v|)^2,(\sigma_a.|a|)^2,0 \end{bmatrix}$$
+
+* Update the predicted state value: $$x_{t+1 \vert t} = f(x_t, u_t)$$
+
+* Update the predicted covariance: $$P_{t+1 \vert t} = F_t\ P_t\ F_t^T + \Sigma_{x,t}$$
+
 
 ###### Step 3 : Update
 
-<center><img src="/img/kalman.jpg" alt="matlab" width="400"></center>
+* Define the measurement vector based on the sensor values: $$ z = \begin{bmatrix}v\\\dot\theta\\g_x\\g_y \end{bmatrix}$$
 
-<center style="font-size: 10px;"> Image Credits: <a href="https://www.mathworks.com/videos/series/understanding-kalman-filters.html">mathworks.com</a> </center>
+* Define the measurement model based on the measurement function $h(x)$: $$ h(x) = \begin{bmatrix} v \\\frac{v}{L} tan(\phi)\\p_x + g_{x}^{ref}cos(\theta) - g_{y}^{ref}sin(\theta) \\p_y+g_{y}^{ref}cos(\theta) + g_{x}^{ref}sin(\theta)\end{bmatrix}$$
+
+* Calculate Jacobian of the measurement model: $$H_t = \frac{\partial h}{\partial x}$$
+
+* Define the measurement noise covariance as above : $$\Sigma_{z,t} = diag\begin{bmatrix} (\sigma_v.|v|)^2, (\sigma_{\dot \theta})^2, (\sigma_g)^2, (\sigma_g)^2\end{bmatrix}$$
+
+* Find the residual, also known as the innovation , which is the difference between the actual sensor measurement and the predicted measurement based on the current state estimate. It indicates how far off the prediction is from the actual measurement. $$y_t = z_t - h(x_{t+1 \vert t})$$
+
+* Find the innovation covariance, which is the measure of the uncertainty associated with the residual. This ensures that the Kalman gain, calculated in the next step is appropriately scaled to balance the trust of the prediction and the measurement. $$S_t = H_tP_{t+1\vert t}H_t^T + \Sigma_{z,t}$$
+
+* Now finally, calculate the Kalman gain. This is arguably the most important part of the EKF process, and is responsible for determining the weight given to the residual in updating the state estimate. $$K_t = P_{t+1\vert t} H^T_tS_t^{-1}$$
+
+* Now update the state estimate based on the Kalman Gain $$x_{t+1} = x_{t+1 \vert t} + K_ty_t$$
+
+* Update the error covariance $$P_{t+1} = (I - K_tH_t)P_{t+1 \vert t}$$
+
+###### Step  4 : Reloop
+
+* Repeat these steps until you run out of sensor values.
+
+* Plot the state estimate $x_{t+1}$ at every timestep against the ground truth state values to see how accurate or not the EKF is.
 
 <center><img src="/img/ekf.png" alt="EKF" height="400" width="400"></center>
 <br>
