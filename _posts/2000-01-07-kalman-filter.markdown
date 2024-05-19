@@ -215,7 +215,11 @@ $$P_{t+1} = (I - K_tH_t)P_{t+1 \vert t}$$
 
 * Plot the state estimate $x_{t+1}$ at every timestep against the ground truth state values to see how accurate or not the EKF is.
 
-<center><img src="/img/ekf.png" alt="EKF" height="400" width="400"></center>
+<center><img src="/img/ekf1.png" alt="EKF" width="400"></center>
 <br>
+
+#### Conclusion
+
+EKF is cool, but there are better ones out there. EKF depends a lot on the noise being gaussian and the system being linearizable. However, it's all simple linear algebra and simple to compute. If you have more unruly environments and a lot of compute power, use something like a particle filter. The math is a lot more complex, and there's a lot of computation going on but the prerequisites are a lot less and it can be used pretty much off the shelf.
 
 [github repo](https://github.com/ashwath-karthikeyan/kalman-filter.git)
