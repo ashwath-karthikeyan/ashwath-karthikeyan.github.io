@@ -130,9 +130,9 @@ $$H_t = \begin{bmatrix}
 
 Finally, we require the two covariance matrices, one for the inaccuracies of the system model, $\Sigma_{x,t}$ and one for the errors in the sensor observations, $\Sigma_{z,t}$. These matrices let the EKF know how much or how less it can trust the system model and the sensor observations, and can be calculated from the problem statement, based on the standard deviations given.
 
-$$\Sigma_{x,t} = diag\begin{bmatrix}(\sigma_{fwd}.|v|)^2, (\sigma_{side}.|v|)^2, (\sigma_{\theta}.|v|)^2,(\sigma_a.|a|)^2,0 \end{bmatrix}$$
+$$\Sigma_{x,t} = diag\begin{bmatrix}(\sigma_{fwd}.\vert v \vert)^2, (\sigma_{side}.\vertv\vert)^2, (\sigma_{\theta}.\vert v\vert )^2,(\sigma_a.\vert a\vert )^2,0 \end{bmatrix}$$
 
-$$\Sigma_{z,t} = diag\begin{bmatrix} (\sigma_v.|v|)^2, (\sigma_{\dot \theta})^2, (\sigma_g)^2, (\sigma_g)^2\end{bmatrix}$$
+$$\Sigma_{z,t} = diag\begin{bmatrix} (\sigma_v.\vert v\vert )^2, (\sigma_{\dot \theta})^2, (\sigma_g)^2, (\sigma_g)^2\end{bmatrix}$$
 
 ##### Plugging into EKF algorithm
 
@@ -152,7 +152,7 @@ Now that we have all the components required for the EKF, let's see how the algo
 
 * Calculate Jacobian of the control input model: $$g_t = \frac{\partial f}{\partial u}$$
 
-* Define the process noise covariance as above: $$\Sigma_{x,t} = diag\begin{bmatrix}(\sigma_{fwd}.|v|)^2, (\sigma_{side}.|v|)^2, (\sigma_{\theta}.|v|)^2,(\sigma_a.|a|)^2,0 \end{bmatrix}$$
+* Define the process noise covariance as above: $$\Sigma_{x,t} = diag\begin{bmatrix}(\sigma_{fwd}.\vert v \vert)^2, (\sigma_{side}.\vert v \vert)^2, (\sigma_{\theta}.\vert v \vert)^2,(\sigma_a.\vert a \vert)^2,0 \end{bmatrix}$$
 
 * Update the predicted state value: $$x_{t+1 \vert t} = f(x_t, u_t)$$
 
@@ -167,7 +167,7 @@ Now that we have all the components required for the EKF, let's see how the algo
 
 * Calculate Jacobian of the measurement model: $$H_t = \frac{\partial h}{\partial x}$$
 
-* Define the measurement noise covariance as above : $$\Sigma_{z,t} = diag\begin{bmatrix} (\sigma_v.|v|)^2, (\sigma_{\dot \theta})^2, (\sigma_g)^2, (\sigma_g)^2\end{bmatrix}$$
+* Define the measurement noise covariance as above : $$\Sigma_{z,t} = diag\begin{bmatrix} (\sigma_v.\vert v\vert )^2, (\sigma_{\dot \theta})^2, (\sigma_g)^2, (\sigma_g)^2\end{bmatrix}$$
 
 * Find the residual, also known as the innovation , which is the difference between the actual sensor measurement and the predicted measurement based on the current state estimate. It indicates how far off the prediction is from the actual measurement. $$y_t = z_t - h(x_{t+1 \vert t})$$
 
