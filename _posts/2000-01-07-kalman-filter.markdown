@@ -130,7 +130,7 @@ $$H_t = \begin{bmatrix}
 
 Finally, we require the two covariance matrices, one for the inaccuracies of the system model, $\Sigma_{x,t}$ and one for the errors in the sensor observations, $\Sigma_{z,t}$. These matrices let the EKF know how much or how less it can trust the system model and the sensor observations, and can be calculated from the problem statement, based on the standard deviations given.
 
-$$\Sigma_{x,t} = diag\begin{bmatrix}(\sigma_{fwd}.\vert v \vert)^2, (\sigma_{side}.\vertv\vert)^2, (\sigma_{\theta}.\vert v\vert )^2,(\sigma_a.\vert a\vert )^2,0 \end{bmatrix}$$
+$$\Sigma_{x,t} = diag\begin{bmatrix}(\sigma_{fwd}.\vert v \vert)^2, (\sigma_{side}.\vert v\vert)^2, (\sigma_{\theta}.\vert v\vert )^2,(\sigma_a.\vert a\vert )^2,0 \end{bmatrix}$$
 
 $$\Sigma_{z,t} = diag\begin{bmatrix} (\sigma_v.\vert v\vert )^2, (\sigma_{\dot \theta})^2, (\sigma_g)^2, (\sigma_g)^2\end{bmatrix}$$
 
@@ -146,38 +146,68 @@ Now that we have all the components required for the EKF, let's see how the algo
 
 ###### Step 2 : Prediction
 
-* Predict the state using the Dubins Car model: $$\dot x = f(x,u)$$
+* Predict the state using the Dubins Car model: 
 
-* Calculate Jacobian of the state transition model: $$F_t = \frac{\partial f}{\partial x}$$
+$$\dot x = f(x,u)$$
 
-* Calculate Jacobian of the control input model: $$g_t = \frac{\partial f}{\partial u}$$
+* Calculate Jacobian of the state transition model: 
 
-* Define the process noise covariance as above: $$\Sigma_{x,t} = diag\begin{bmatrix}(\sigma_{fwd}.\vert v \vert)^2, (\sigma_{side}.\vert v \vert)^2, (\sigma_{\theta}.\vert v \vert)^2,(\sigma_a.\vert a \vert)^2,0 \end{bmatrix}$$
+$$F_t = \frac{\partial f}{\partial x}$$
 
-* Update the predicted state value: $$x_{t+1 \vert t} = f(x_t, u_t)$$
+* Calculate Jacobian of the control input model: 
 
-* Update the predicted covariance: $$P_{t+1 \vert t} = F_t\ P_t\ F_t^T + \Sigma_{x,t}$$
+$$g_t = \frac{\partial f}{\partial u}$$
+
+* Define the process noise covariance as above: 
+
+$$\Sigma_{x,t} = diag\begin{bmatrix}(\sigma_{fwd}.\vert v \vert)^2, (\sigma_{side}.\vert v \vert)^2, (\sigma_{\theta}.\vert v \vert)^2,(\sigma_a.\vert a \vert)^2,0 \end{bmatrix}$$
+
+* Update the predicted state value: 
+
+$$x_{t+1 \vert t} = f(x_t, u_t)$$
+
+* Update the predicted covariance: 
+
+$$P_{t+1 \vert t} = F_t\ P_t\ F_t^T + \Sigma_{x,t}$$
 
 
 ###### Step 3 : Update
 
-* Define the measurement vector based on the sensor values: $$ z = \begin{bmatrix}v\\\dot\theta\\g_x\\g_y \end{bmatrix}$$
+* Define the measurement vector based on the sensor values: 
 
-* Define the measurement model based on the measurement function $h(x)$: $$ h(x) = \begin{bmatrix} v \\\frac{v}{L} tan(\phi)\\p_x + g_{x}^{ref}cos(\theta) - g_{y}^{ref}sin(\theta) \\p_y+g_{y}^{ref}cos(\theta) + g_{x}^{ref}sin(\theta)\end{bmatrix}$$
+$$ z = \begin{bmatrix}v\\\dot\theta\\g_x\\g_y \end{bmatrix}$$
 
-* Calculate Jacobian of the measurement model: $$H_t = \frac{\partial h}{\partial x}$$
+* Define the measurement model based on the measurement function $h(x)$: 
 
-* Define the measurement noise covariance as above : $$\Sigma_{z,t} = diag\begin{bmatrix} (\sigma_v.\vert v\vert )^2, (\sigma_{\dot \theta})^2, (\sigma_g)^2, (\sigma_g)^2\end{bmatrix}$$
+$$ h(x) = \begin{bmatrix} v \\\frac{v}{L} tan(\phi)\\p_x + g_{x}^{ref}cos(\theta) - g_{y}^{ref}sin(\theta) \\p_y+g_{y}^{ref}cos(\theta) + g_{x}^{ref}sin(\theta)\end{bmatrix}$$
 
-* Find the residual, also known as the innovation , which is the difference between the actual sensor measurement and the predicted measurement based on the current state estimate. It indicates how far off the prediction is from the actual measurement. $$y_t = z_t - h(x_{t+1 \vert t})$$
+* Calculate Jacobian of the measurement model: 
 
-* Find the innovation covariance, which is the measure of the uncertainty associated with the residual. This ensures that the Kalman gain, calculated in the next step is appropriately scaled to balance the trust of the prediction and the measurement. $$S_t = H_tP_{t+1\vert t}H_t^T + \Sigma_{z,t}$$
+$$H_t = \frac{\partial h}{\partial x}$$
 
-* Now finally, calculate the Kalman gain. This is arguably the most important part of the EKF process, and is responsible for determining the weight given to the residual in updating the state estimate. $$K_t = P_{t+1\vert t} H^T_tS_t^{-1}$$
+* Define the measurement noise covariance as above : 
 
-* Now update the state estimate based on the Kalman Gain $$x_{t+1} = x_{t+1 \vert t} + K_ty_t$$
+$$\Sigma_{z,t} = diag\begin{bmatrix} (\sigma_v.\vert v\vert )^2, (\sigma_{\dot \theta})^2, (\sigma_g)^2, (\sigma_g)^2\end{bmatrix}$$
 
-* Update the error covariance $$P_{t+1} = (I - K_tH_t)P_{t+1 \vert t}$$
+* Find the residual, also known as the innovation , which is the difference between the actual sensor measurement and the predicted measurement based on the current state estimate. It indicates how far off the prediction is from the actual measurement. 
+
+$$y_t = z_t - h(x_{t+1 \vert t})$$
+
+* Find the innovation covariance, which is the measure of the uncertainty associated with the residual. This ensures that the Kalman gain, calculated in the next step is appropriately scaled to balance the trust of the prediction and the measurement. 
+
+$$S_t = H_tP_{t+1\vert t}H_t^T + \Sigma_{z,t}$$
+
+* Now finally, calculate the Kalman gain. This is arguably the most important part of the EKF process, and is responsible for determining the weight given to the residual in updating the state estimate. 
+
+$$K_t = P_{t+1\vert t} H^T_tS_t^{-1}$$
+
+* Now update the state estimate based on the Kalman Gain 
+
+$$x_{t+1} = x_{t+1 \vert t} + K_ty_t$$
+
+* Update the error covariance 
+
+$$P_{t+1} = (I - K_tH_t)P_{t+1 \vert t}$$
 
 ###### Step  4 : Reloop
 
