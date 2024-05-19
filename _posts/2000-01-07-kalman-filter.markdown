@@ -220,6 +220,6 @@ $$P_{t+1} = (I - K_tH_t)P_{t+1 \vert t}$$
 
 #### Conclusion
 
-EKF is cool, but there are better ones out there. EKF depends a lot on the noise being gaussian and the system being linearizable. However, it's all simple linear algebra and simple to compute. If you have more unruly environments and a lot of compute power, use something like a particle filter. The math is a lot more complex, and there's a lot of computation going on but the prerequisites are a lot less and it can be used pretty much off the shelf.
+As can be seen, all of the computation in EKF is linear algebra, which reduces the computation massively. However, it assumes Gaussian noise and the ability to linearize the system whose state is to be estimated. This makes it suitable for many applications, but it falls short in more complex, non-linear environments. When more computational power is available, particle filters offer a superior alternative. They can handle non-linearities and arbitrary noise distributions more effectively, although they require more complex mathematics and significantly higher computational resources. Despite the increased complexity, particle filters provide robust performance in a wider range of scenarios, making them a more versatile choice for challenging applications.
 
-[github repo](https://github.com/ashwath-karthikeyan/kalman-filter.git)
+Check the [github repo](https://github.com/ashwath-karthikeyan/kalman-filter.git) for the problem statement and solution code.
