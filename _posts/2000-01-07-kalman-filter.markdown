@@ -215,11 +215,24 @@ $$P_{t+1} = (I - K_tH_t)P_{t+1 \vert t}$$
 
 * Plot the state estimate $x_{t+1}$ at every timestep against the ground truth state values to see how accurate or not the EKF is.
 
-<center><img src="/img/ekf1.png" alt="EKF" width="400"></center>
+<center><img src="/img/ekf1.png" alt="EKF1" width="400"></center>
 <br>
 
 #### Conclusion
 
-As can be seen, all of the computation in EKF is linear algebra, which reduces the computation massively. However, it assumes Gaussian noise and the ability to linearize the system whose state is to be estimated. This makes it suitable for many applications, but it falls short in more complex, non-linear environments. When more computational power is available, particle filters offer a superior alternative. They can handle non-linearities and arbitrary noise distributions more effectively, although they require more complex mathematics and significantly higher computational resources. Despite the increased complexity, particle filters provide robust performance in a wider range of scenarios, making them a more versatile choice for challenging applications.
+From the plot, it is evident that while the EKF performs adequately in predicting the vehicle's state most of the time, there are instances when the estimated state deviates, fluctuating around the ground truth values.
 
-Check the [github repo](https://github.com/ashwath-karthikeyan/kalman-filter.git) for the problem statement and solution code.
+<center><img src="/img/ekf4.png" alt="EKF4" width="400"></center>
+<br>
+
+These deviations become more pronounced as the errors in observations and dynamics increase, especially towards the end of the time axis, where the accumulation of errors becomes too large for the EKF to correct.
+
+This can be attributed to two possible reasons:
+
+1. Our initial assumption that the sensor noise is Gaussian may be incorrect. If the noise is skewed in a non-Gaussian manner, it can cause errors to accumulate over time.
+
+2. There might be unaccounted-for errors in the dynamics, and these errors may be non-Gaussian.
+
+Therefore, it can be said that the EKF relies heavily on matrix operations and linear algebra, which significantly reduces computation. However, it assumes Gaussian noise and the ability to linearize the system being estimated. This makes it suitable for many applications but inadequate for more complex, non-linear environments. When more computational power is available, other state estimation techniques, such as particle filters, offer a superior alternative. They can handle non-linearities and arbitrary noise distributions more effectively, although they require more complex mathematics and significantly higher computational resources. Despite the increased complexity, particle filters provide robust performance in a wider range of scenarios, making them a more versatile choice for challenging applications.
+
+Here is the [github repo](https://github.com/ashwath-karthikeyan/kalman-filter.git) for the problem statement and solution code.
