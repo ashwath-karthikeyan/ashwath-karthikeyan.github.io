@@ -29,21 +29,21 @@ $$u = \begin{bmatrix}a \\ \psi \end{bmatrix}.$$
 <center><img src="/img/dubbin.png" alt="dubbin" height="400" width="400"></center>
 <br>
 
-Here, $(p_x,p_y)$ is the position of the robot in the start frame, the heading, $\theta$, is the angle it makes with the horizontal axis of the start frame, $v$ and $a$ are the velocity and acceleration respectively, of the robot in the direction of movement. $\phi$ is the steering angle, which is the angle the wheels make with the rest of the vehicle, and $L$ is the turn radius, which is also the distance between the front and rear axles of the robot.
+Here, $(p_x,p_y)$ is the position of the robot in the start frame, the heading, $\theta$, is the angle it makes with the horizontal axis of the start frame, $v$ and $a$ are the velocity and acceleration respectively of the robot in the direction of movement. $\phi$ is the steering angle, which is the angle the wheels make with the rest of the vehicle, and $L$ is the turn radius, which is also the distance between the front and rear axles of the robot-vehicle.
  
-The issue is that we do not have a direct reading of its state space. Instead we have a GPS sensor that can calculate the car's forward velocity $v$, the heading rate $\dot \theta$, and the global coordinates $(g_x, g_y)$. The GPS sensor is located at point $(g_x^{ref}, g_y^{ref})$ in the robot's start frame. Thus, the measurement vector can we written as 
+Our problem is that we do not have a direct reading of its state space. Instead we have a GPS sensor that can calculate the car's forward velocity $v$, the heading rate $\dot \theta$, and the global coordinates $(g_x, g_y)$. The GPS sensor is located at point $(g_x^{ref}, g_y^{ref})$ in the robot's start frame. Thus, the measurement vector can we written as 
 
 $$ z = \begin{bmatrix}v\\\dot\theta\\g_x\\g_y \end{bmatrix}$$
 
 ##### Inaccuracies in the system
 
-However, on testing, we find out that there are errors in the dynamics model. This is to be expected, since Dubins Car is only a theoretical model of a real vehicle's dynamics, and theory will only take you so far. 
+On testing, however, we find out that there are errors in the dynamics model. This is to be expected, since Dubins Car is only a theoretical model of a real vehicle's dynamics, and theory will only take you so far. 
 
 The results of testing gives us reason to believe that 
 
-1. Due to physical issues with the acceleration pedal, the set acceleration $a$ has an error of standard deviation $\lvert a \rvert \cdot \sigma_a$.
+1. Due to physical issues with the acceleration pedal, the set acceleration $a$ may have an error of standard deviation $\lvert a \rvert \cdot \sigma_a$.
 
-2. There is an error in the steering angle, $\phi$, causing the heading $\theta$ to deviate, especially at high speeds. This error has the standard deviation $\lvert v \rvert \cdot \sigma_\theta$.
+2. There might be an error in the steering angle, $\phi$, causing the heading $\theta$ to deviate, especially at high speeds. This error has the standard deviation $\lvert v \rvert \cdot \sigma_\theta$.
 
 3. The vehicle's position slips occassionally, and the velocity error in the forward direction is estimated to have a standard deviation $\lvert v \rvert \cdot \sigma_{fwd}$ and the error in the sideways direction has an SD of $ \lvert v \rvert \cdot \ \sigma_{side}$.
 
@@ -105,7 +105,7 @@ $$ h(x) = \begin{bmatrix} v \\\frac{v}{L} tan(\phi)\\p_x + g_{x}^{ref}cos(\theta
 
 ##### Linearizing the model
 
-The next step is to linearize the given model. This is necessary because an EKF, like a standard Kalman Filter, can only predict the states of linear systems. The EKF extends this capability to non-linear models by approximating them as linear at each time step around the current estimate (using a Taylor series expansion), thus allowing it to handle non-linear systems effectively.
+The next step is to linearize the given model. This is necessary because an EKF, like a standard Kalman Filter, can only predict the states of linear systems. The EKF extends this capability to non-linear models by approximating them as linear at each time step around the current estimate, thus allowing it to handle non-linear systems effectively.
 
 To linearize the model, we find the Jacobians of the vectors we gathered before. To do that we need to find the partial derivatives
 
@@ -120,7 +120,7 @@ $$F_t = \begin{bmatrix}0 & 0 & -v \sin(\theta) & \cos(\theta) & 0 \\
 0 & 0 & 0 & 0 & 0
 \end{bmatrix}$$
 
-$$g_t = \begin{bmatrix} 0&0 \\ 0&0 \\ 0&0 \\ 1&0 \\ 0&1 \\  \end{bmatrix}$$
+$$g_t = \begin{bmatrix} 0&0 \\ 0&0 \\ 0&0 \\ \Delta t&0 \\ 0&\Delta t \\  \end{bmatrix}$$
 
 $$H_t = \begin{bmatrix}
 0 & 0 & 0 & 1 & 0 \\
@@ -134,7 +134,7 @@ $$\Sigma_{x,t} = diag\begin{bmatrix}(\sigma_{fwd}.\vert v \vert)^2, (\sigma_{sid
 
 $$\Sigma_{z,t} = diag\begin{bmatrix} (\sigma_v.\vert v\vert )^2, (\sigma_{\dot \theta})^2, (\sigma_g)^2, (\sigma_g)^2\end{bmatrix}$$
 
-##### Plugging into EKF algorithm
+##### Writing the EKF algorithm
 
 Now that we have all the components required for the EKF, let's see how the algorithm works in detail.
 
@@ -146,17 +146,22 @@ Now that we have all the components required for the EKF, let's see how the algo
 
 ###### Step 2 : Prediction
 
-* Predict the state using the Dubins Car model: 
+* Predict the new state using the Dubins Car model: 
 
 $$\dot x = f(x,u)$$
 
-* Calculate Jacobian of the state transition model: 
+* Define Jacobian of the state transition model: 
 
-$$F_t = \frac{\partial f}{\partial x}$$
+$$F_t = \begin{bmatrix}0 & 0 & -v \sin(\theta) & \cos(\theta) & 0 \\
+0 & 0 & v \cos(\theta) & \sin(\theta) & 0 \\
+0 & 0 & 0 & \frac{\tan(\phi)}{L} & \frac{v \left(sec^2(\phi) \right)}{L} \\
+0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0
+\end{bmatrix}$$
 
-* Calculate Jacobian of the control input model: 
+* Define the Jacobian of the control input model: 
 
-$$g_t = \frac{\partial f}{\partial u}$$
+$$g_t = \begin{bmatrix} 0&0 \\ 0&0 \\ 0&0 \\ \Delta t&0 \\ 0&\Delta t \\  \end{bmatrix}$$
 
 * Define the process noise covariance as above: 
 
@@ -183,7 +188,11 @@ $$ h(x) = \begin{bmatrix} v \\\frac{v}{L} tan(\phi)\\p_x + g_{x}^{ref}cos(\theta
 
 * Calculate Jacobian of the measurement model: 
 
-$$H_t = \frac{\partial h}{\partial x}$$
+$$H_t = \begin{bmatrix}
+0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & \frac{\tan(\phi)}{L} & \frac{v \left(\sec^2(\phi)\right)}{L} \\
+\Delta t & 0 & -g_{x}^{ref}sin(\theta) - g_{y}^{ref}cos(\theta) &0&0\\0 & \Delta t & g_{x}^{ref}cos(\theta) - g_{y}^{ref}sin(\theta) &0&0
+\end{bmatrix}$$
 
 * Define the measurement noise covariance as above : 
 
@@ -215,10 +224,10 @@ $$P_{t+1} = (I - K_tH_t)P_{t+1 \vert t}$$
 
 * Plot the state estimate $x_{t+1}$ at every timestep against the ground truth state values to see how accurate or not the EKF is.
 
+##### Results and inference
+
 <center><img src="/img/ekf1.png" alt="EKF1" width="400"></center>
 <br>
-
-#### Conclusion
 
 From the plot, it is evident that while the EKF performs adequately in predicting the vehicle's state most of the time, there are instances when the estimated state deviates, fluctuating around the ground truth values.
 
@@ -233,6 +242,8 @@ This can be attributed to two possible reasons:
 
 2. There might be unaccounted-for errors in the dynamics, and these errors may be non-Gaussian.
 
-Therefore, it can be said that the EKF relies heavily on matrix operations and linear algebra, which significantly reduces computation. However, it assumes Gaussian noise and the ability to linearize the system being estimated. This makes it suitable for many applications but inadequate for more complex, non-linear environments. When more computational power is available, other state estimation techniques, such as particle filters, offer a superior alternative. They can handle non-linearities and arbitrary noise distributions more effectively, although they require more complex mathematics and significantly higher computational resources. Despite the increased complexity, particle filters provide robust performance in a wider range of scenarios, making them a more versatile choice for challenging applications.
+#### Conclusion
+
+EKF relies heavily on matrix operations and linear algebra, which significantly reduces computation. However, it assumes Gaussian noise and the ability to linearize the system being estimated. This makes it suitable for many applications but inadequate for more complex, non-linear environments. When more computational power is available, other state estimation techniques, such as particle filters, offer a superior alternative. They can handle non-linearities and arbitrary noise distributions more effectively, although they require more complex mathematics and significantly higher computational resources. Despite the increased complexity, particle filters provide robust performance in a wider range of scenarios, making them a more versatile choice for challenging applications.
 
 Here is the [github repo](https://github.com/ashwath-karthikeyan/kalman-filter.git) for the problem statement and solution code.
