@@ -3,7 +3,7 @@ layout: post
 title:  Kalman Filtering
 permalink: /Kalman Filter/
 date:   2024-03-05
-image:  ekf.png
+image:  ekf1.png
 tags:   [State Estimation, Control]
 ---
 ## State Estimation with Extended Kalman Filter
