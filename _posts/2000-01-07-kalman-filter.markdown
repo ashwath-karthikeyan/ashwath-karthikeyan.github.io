@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  Kalman Filtering
-permalink: /Kalman Filter/
+title:  State Estimation using EKF
+permalink: /kalman-filter/
 date:   2024-03-05
 image:  ekf1.png
 tags:   [State Estimation, Control]
 ---
-## State Estimation with Extended Kalman Filter
+## State Estimation of Autonomous Vehicles using Extended Kalman Filter
 
 State estimation is an important technique used in fields such as robotics and aerospace, where true system states are often obscured or indirectly observed through noisy sensors. Techniques like Extended Kalman Filter (EKF) are employed to infer these hidden states by making use of mathematical models and measurements. 
 
