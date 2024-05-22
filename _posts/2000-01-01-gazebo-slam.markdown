@@ -15,7 +15,7 @@ Simultaneous Localization and Mapping (SLAM) is a critical technology in robotic
 
 This project is the result of what I learned from an [online course](https://www.udemy.com/course/ros-navigation/) I took, which was a solid introduction to ROS-Gazebo, mobile robotics, and most importantly, SLAM algorithms. ROS has an infamously steep learning curve, but this course simplifies the process and guides you through the setup, installation, and a quick implementation of a simple project. I recommend it to anyone starting out in robotics and ROS.
 
-As can be seen in the name, Simultaneous Localization and Mapping is a combination of two tasks performed at once. Localization is the process by which a robot determines its position within an environment, often relative to a known location. Mapping, on the other hand, involves the creation of a map of the environment itself. The inherent challenge in SLAM is that effective mapping requires accurate localization, and accurate localization depends on a detailed map. This interdependency creates a complex chicken-and-egg problem, as each task requires the other to be completed successfully. SLAM algorithms are designed to solve this dilemma by updating the map and the robot's position simultaneously, using data from sensors and previous maps.
+As can be seen in the name, Simultaneous Localization and Mapping is a combination of two tasks performed at once. Localization is the process by which a robot determines its position within an environment, often relative to a known location. Mapping, on the other hand, involves the creation of a map of the environment itself. The inherent challenge in SLAM is that effective mapping requires accurate localization, and accurate localization depends on a detailed map. This interdependency creates a complex chicken-and-egg problem, as each task requires the other to be completed successfully. SLAM algorithms are designed to solve this dilemma by updating the map and the robot's position simultaneously, using data from sensors and previously generated maps.
 
 ### Installing TurtleBot3 library
 
@@ -25,8 +25,22 @@ Following the instructions in the e-manual, we download all the packages require
 
 After installation, we run the simulation script, which is also given in the e-manual. We also run the teleoperation command, showing us that in fact, everything works as it is supposed to.
 
-### SLAM methods
+### Offline SLAM
 
-The first stage of autonomous navigation is to understand the environment the robot is in.
+Now the most important part of Autonomous Navigation is understanding the environment, and map-building, which is the essense of SLAM. SLAM can be of essentially two types Online and Offline SLAM. Online SLAM is when you have no idea about the environment,  
+
+### Map Navigation
+
+Once the map of the environment is generated and stored, it can now be used as a starting point. This is one of the advantages of Offline-SLAM. If you have the ability to collect data of the environment beforehand, it improves the navigation in many ways:
+
+1. **Map Accuracy**: By processing extensive data offline, SLAM can produce more accurate and reliable maps without the real-time computational constraints. This results in a high-quality map that can be used for precise navigation.
+
+2. **Resource Allocation**: Performing SLAM offline frees up computational resources on the robot during real-time operations. This allows the robot to allocate more processing power to other critical tasks such as obstacle avoidance, path planning, and dynamic decision-making.
+
+3. **Path Optimization**: With a pre-established map, the robot can plan paths more efficiently. It can calculate optimal routes ahead of time, considering various factors like the shortest path, least obstacles, or safest routes.
+
+4. **Error Reduction**: Offline SLAM can extensively analyze data to correct errors in sensor readings and mapping, reducing drift and cumulative errors that often occur in real-time mapping.
+
+5. **Enhanced Situational Awareness**: Having a pre-built map allows the robot to better understand its environment, anticipate potential issues, and adapt to changes detected in real-time compared to what was previously mapped.
 
 [github repo](https://github.com/ashwath-karthikeyan/ros-slam-gazebo.git)

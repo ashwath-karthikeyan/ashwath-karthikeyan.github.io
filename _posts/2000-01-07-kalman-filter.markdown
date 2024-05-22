@@ -224,7 +224,7 @@ $$P_{t+1} = (I - K_tH_t)P_{t+1 \vert t}$$
 
 * Plot the state estimate $x_{t+1}$ at every timestep against the ground truth state values to see how accurate or not the EKF is.
 
-##### Results and inference
+#### Results and inference
 
 <center><img src="/img/ekf1.png" alt="EKF1" width="400"></center>
 <br>
