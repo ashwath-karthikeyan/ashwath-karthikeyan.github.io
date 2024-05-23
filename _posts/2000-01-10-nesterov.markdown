@@ -2,10 +2,12 @@
 layout: post
 title:  Nesterov's Accelerated Gradient Descent
 permalink: /nesterov/
-date:   2024-04-15
+date:   2024-05-01
 image:  rift.png
 tags:   [Optimization]
 ---
 ## Nesterov's Accelerated Gradient Descent Method
+
+documentation coming soon
 
 [github repo](https://github.com/ashwath-karthikeyan/nesterov.git)

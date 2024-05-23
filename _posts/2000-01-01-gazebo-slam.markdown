@@ -43,4 +43,6 @@ Once the map of the environment is generated and stored, it can now be used as a
 
 5. **Enhanced Situational Awareness**: Having a pre-built map allows the robot to better understand its environment, anticipate potential issues, and adapt to changes detected in real-time compared to what was previously mapped.
 
+documentation coming soon
+
 [github repo](https://github.com/ashwath-karthikeyan/ros-slam-gazebo.git)
