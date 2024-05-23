@@ -6,7 +6,7 @@ date:   2022-09-15
 image:  slam.png
 tags:   [SLAM]
 ---
-## Implemtation of SLAM on TurtleBot3 Waffle in ROS-Gazebo
+## Implementation of SLAM on TurtleBot3 Waffle in ROS-Gazebo
 
 <center><img src="/img/slam.png" alt="SLAM" height="400" width="400"></center>
 <br>
