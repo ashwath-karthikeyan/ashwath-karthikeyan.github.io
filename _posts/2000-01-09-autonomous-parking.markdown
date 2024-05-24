@@ -8,6 +8,8 @@ tags:   [Autonomous Vehicles, Perception, Planning, Control]
 ---
 ## Implementation of an Autonomous Parking Functionality in a Self-Driving Car
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/https://youtu.be/xG1_ZaXZ-rI?si=N-V9xJUqmFOuX8du" frameborder="1" allowfullscreen></iframe>
+
 documentation coming soon
 
 [github repo](https://github.com/ashwath-karthikeyan/GEMstack.git)

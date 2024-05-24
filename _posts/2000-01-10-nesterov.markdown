@@ -8,6 +8,12 @@ tags:   [Optimization]
 ---
 ## Nesterov's Accelerated Gradient Descent Method
 
+<center><img src="/img/rift.png" alt="Lane Fit" height="400" width="400"></center>
+<br>
+
+<center><img src="/img/nesterov.png" alt="Lane Fit"  width="400"></center>
+<br>
+
 documentation coming soon
 
 [github repo](https://github.com/ashwath-karthikeyan/nesterov.git)
