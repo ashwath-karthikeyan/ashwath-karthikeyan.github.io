@@ -31,17 +31,17 @@ Let's now build a map that we can use as a starting point for navigation. This i
 
 For this task, we use the `gmapping` package, a widely-used ROS package for SLAM. Gmapping uses laser range data and odometry information to create a 2D occupancy grid map of the environment. To start the mapping process, we launch the gmapping node:
 
-##
+#
     roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=gmapping
 
 While the gmapping node is running, we control the robot using the teleoperation node to manually drive it around the environment:
 
-##
+#
     roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
 
 As the robot moves, the gmapping package processes the laser scan data and updates the map in real-time. Once we have sufficiently explored the environment, we save the generated map:
 
-##
+#
     rosrun map_server map_saver -f ~/map
 
 The map is now saved and can be used for navigation tasks.
@@ -52,7 +52,7 @@ Once the map of the environment is generated and stored, it can now be used for 
 
 To launch the navigation stack, we start the AMCL and move_base nodes:
 
-##
+#
     roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/map.yaml
 
 With the navigation stack running, the robot can receive navigation goals and plan paths to reach them. We can set navigation goals using RViz, a visualization tool in ROS. In RViz, we load the map and set the initial pose of the robot using the `2D Pose Estimate` tool. Then, we set navigation goals using the `2D Nav Goal` tool.
