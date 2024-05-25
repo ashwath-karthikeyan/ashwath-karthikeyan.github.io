@@ -25,24 +25,49 @@ Following the instructions in the e-manual, we download all the packages require
 
 After installation, we run the simulation script, which is also given in the e-manual. We also run the teleoperation command, showing us that in fact, everything works as it is supposed to.
 
-### Offline SLAM
+### Map Generation
 
-Now the most important part of Autonomous Navigation is understanding the environment, and map-building, which is the essense of SLAM. SLAM can be of essentially two types Online and Offline SLAM. Online SLAM is when you have no idea about the environment,  
+Let's now build a map that we can use as a starting point for navigation. This is known as Offline SLAM, where the robot explores its environment before the actual navigation task, allowing it to gather information about its surroundings. Offline SLAM has advantages over Online SLAM, where the robot builds the map from scratch while simultaneously navigating. Offline SLAM can lead to more reliable navigation because the robot has prior knowledge of the environment, reducing the computational load during navigation.
+
+For this task, we use the `gmapping` package, a widely-used ROS package for SLAM. Gmapping uses laser range data and odometry information to create a 2D occupancy grid map of the environment. To start the mapping process, we launch the gmapping node:
+
+```bash
+roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=gmapping
+```
+
+While the gmapping node is running, we control the robot using the teleoperation node to manually drive it around the environment:
+
+```bash
+roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
+```
+
+As the robot moves, the gmapping package processes the laser scan data and updates the map in real-time. Once we have sufficiently explored the environment, we save the generated map:
+
+```bash
+rosrun map_server map_saver -f ~/map
+```
+
+The map is now saved and can be used for navigation tasks.
 
 ### Map Navigation
 
-Once the map of the environment is generated and stored, it can now be used as a starting point. This is one of the advantages of Offline-SLAM. If you have the ability to collect data of the environment beforehand, it improves the navigation in many ways:
+Once the map of the environment is generated and stored, it can now be used for navigation. The `move_base` package handles navigation by combining the map with sensor data to plan and execute paths. The move_base node uses the Adaptive Monte Carlo Localization (AMCL) algorithm for localization, which continuously updates the robot's position based on sensor data and the pre-built map.
 
-1. **Map Accuracy**: By processing extensive data offline, SLAM can produce more accurate and reliable maps without the real-time computational constraints. This results in a high-quality map that can be used for precise navigation.
+To launch the navigation stack, we start the AMCL and move_base nodes:
 
-2. **Resource Allocation**: Performing SLAM offline frees up computational resources on the robot during real-time operations. This allows the robot to allocate more processing power to other critical tasks such as obstacle avoidance, path planning, and dynamic decision-making.
+```bash
+roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/map.yaml
+```
 
-3. **Path Optimization**: With a pre-established map, the robot can plan paths more efficiently. It can calculate optimal routes ahead of time, considering various factors like the shortest path, least obstacles, or safest routes.
+With the navigation stack running, the robot can receive navigation goals and plan paths to reach them. We can set navigation goals using RViz, a visualization tool in ROS. In RViz, we load the map and set the initial pose of the robot using the `2D Pose Estimate` tool. Then, we set navigation goals using the `2D Nav Goal` tool.
 
-4. **Error Reduction**: Offline SLAM can extensively analyze data to correct errors in sensor readings and mapping, reducing drift and cumulative errors that often occur in real-time mapping.
+As the robot navigates, the move_base node continuously plans the path, avoiding obstacles and dynamically adjusting to changes in the environment. This ensures that the robot reaches its destination safely and efficiently.
 
-5. **Enhanced Situational Awareness**: Having a pre-built map allows the robot to better understand its environment, anticipate potential issues, and adapt to changes detected in real-time compared to what was previously mapped.
+### Conclusion
 
-documentation coming soon
+Implementing SLAM on a TurtleBot3 Waffle in a ROS-Gazebo environment demonstrates the powerful capabilities of ROS for autonomous navigation. By using the gmapping package for mapping and the move_base package for navigation, we achieve a robust SLAM implementation that allows the robot to explore and navigate an environment autonomously. This project not only highlights the importance of SLAM in robotics but also provides a practical example of how to set up and run SLAM algorithms in a simulated environment.
+
+For anyone starting in robotics and ROS, following this guide will help you understand the fundamental concepts and practical steps involved in implementing SLAM on a mobile robot. The resources mentioned, including the TurtleBot3 e-manual and the online course, provide excellent starting points for further exploration and learning in the field of autonomous robotics.
+
 
 [github repo](https://github.com/ashwath-karthikeyan/ros-slam-gazebo.git)
