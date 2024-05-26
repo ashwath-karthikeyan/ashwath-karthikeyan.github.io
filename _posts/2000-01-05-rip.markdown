@@ -3,7 +3,7 @@ layout: post
 title:  Rotary Inverted Pendulum
 permalink: /rip/
 date:   2023-12-30
-image:  rip.png
+image:  pid_small.gif
 tags:   [Control]
 ---
 ## Simulation of a Rotary Inverted Pendulum in Matlab-Simulink.
