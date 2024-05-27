@@ -8,12 +8,29 @@ tags:   [Optimization]
 ---
 ## Nesterov's Accelerated Gradient Descent Method
 
-<center><img src="/img/rift.png" alt="Lane Fit" height="400" width="400"></center>
+Nesterov's Accelerated Gradient Descent (NAG) is a popular optimization technique widely used in fields like machine learning and robotics, where finding the minima of a function, the objective function, is required. This technique is applied to various problems, such as tuning hyperparameters in neural networks or finding the optimal path where the dimensions of the objective function represent its costs.
+
+Vanilla Gradient Descent (GD) is a fundamental optimization method. By adjusting its step size, it can accurately converge to the minima. The update rule for vanilla GD is given by:
+$$ x_{k+1} = x_k - \alpha \nabla f(x_k) $$
+where $x_k$ is the current position, $\alpha$ is the step size, and $\nabla f(x_k)$ is the gradient of the objective function at $x_k$. Despite its simplicity, vanilla GD can be slow when traversing large flat regions, taking a long time to converge. This inefficiency has led to the development of faster techniques, particularly momentum-based methods.
+
+Momentum-based techniques enhance gradient descent by adding a momentum term to the update rule. The momentum term helps accelerate convergence, especially in the presence of large flat regions and steep valleys. The update rule for momentum-based gradient descent is:
+$$ v_{k+1} = \beta v_k + \alpha \nabla f(x_k)$$
+$$ x_{k+1} = x_k - v_{k+1} $$
+Here, $v_k$ is the velocity vector, and $\beta$ is the momentum coefficient, typically between 0 and 1. The momentum term $\beta v_k $ allows the algorithm to build speed in directions with persistent gradients, helping it navigate plateaus and accelerate convergence.
+
+Nesterov's Accelerated Gradient (NAG) further refines this approach by making a slight adjustment. Instead of calculating the gradient at the current position, NAG computes it at a lookahead position, giving a more informed update:v
+$$v_{k+1} = \beta v_k + \alpha \nabla f(x_k - \beta v_k)$$
+$$x_{k+1} = x_k - v_{k+1}$$
+This lookahead step allows NAG to anticipate the future trajectory and make more accurate updates, resulting in faster convergence and better performance.
+
+<center><img src="/img/gradient.png" alt="Lane Fit"  width="400"></center>
 <br>
 
 <center><img src="/img/nesterov.png" alt="Lane Fit"  width="400"></center>
 <br>
 
-documentation coming soon
+<center><img src="/img/rift.png" alt="Lane Fit" height="400" width="400"></center>
+<br>
 
 [github repo](https://github.com/ashwath-karthikeyan/nesterov.git)
