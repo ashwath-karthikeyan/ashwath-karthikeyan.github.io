@@ -8,18 +8,18 @@ tags:   [Optimization]
 ---
 ## Nesterov's Accelerated Gradient Descent Method
 
-### Introduction
-
 Optimization is a branch of mathematics focused on finding the optimal solution to a problem. The 'problem' is represented by a multivariate function, known as the objective function, with the variables being parameters that we wish to optimize. Optimization is used extensively in computer science, particularly in fields like machine learning for fine-tuning hyperparameters of neural networks, and in robotics for determining the most optimal path for a robot, considering various path-related costs.
 
 One way to visualize an optimization problem is by plotting the objective function against its variables. For instance, consider this 2-dimensional function:
 
-$$f(x_1, x_2) = e^{\left(\frac{x_1^2}{8} - \frac{x_2^2}{8}\right)} - e^{\left(-\frac{(x_1 + 3)^2}{2} - \frac{(x_2 + 3)^2}{2}\right)}$$
+$$ f(x_1, x_2) = e^{\left(\frac{x_1^2}{8} - \frac{x_2^2}{8}\right)} - e^{\left(-\frac{(x_1 + 3)^2}{2} - \frac{(x_2 + 3)^2}{2}\right)} $$
 
 The task now, is to find the values of $x_1$ and $x_2$ for which the value of the function is either the highest, known as the maxima, or more commonly the lowest, known as the minima, based on what type of optimization problem it is. 
 
 <center><img src="/img/example.png" alt="Simple Function" width="400"></center>
 <br>
+
+### Gradient descent 
 
 One of the most widely used optimization techniques is gradient descent (GD), which finds the minimal solution by iteratively moving towards the steepest descent direction of the objective function, which is the negative of the gradient at that point. The formula for gradient descent is:
 
@@ -34,14 +34,16 @@ Vanilla Gradient Descent (GD) is generally reliable, but it faces issues with sa
 Momentum-based techniques enhances GD methods by adding a momentum term to the update rule. The momentum term helps accelerate convergence, especially in the presence of large, flat regions and steep, deep valleys. The update rule for momentum-based gradient descent is:
 
 $$ v_{k+1} = \beta v_k + \alpha \nabla f(x_k)$$
+
 $$ x_{k+1} = x_k - v_{k+1} $$
 
 Here, $v_k$ is the velocity vector, and $\beta$ is the momentum coefficient, typically between 0 and 1. The momentum term $\beta v_k $ allows the algorithm to build speed in directions with persisting gradients, i.e., if the gradient value is the same for consecutive iterations, it would place higher trust in that gradient, and thus, would increase the speed, helping it navigate large plateaus and accelerate convergence.
 
 Nesterov's Accelerated Gradient (NAG) further refines this approach by making a slight adjustment. Instead of calculating the gradient at the current position, NAG computes it at a lookahead position, giving a more informed update:
 
-$$v_{k+1} = \beta v_k + \alpha \nabla f(x_k - \beta v_k)$$
-$$x_{k+1} = x_k - v_{k+1}$$
+$$ v_{k+1} = \beta v_k + \alpha \nabla f(x_k - \beta v_k) $$
+
+$$ x_{k+1} = x_k - v_{k+1} $$
 
 This lookahead step allows NAG to anticipate the future trajectory and make more accurate updates, resulting in faster convergence and better performance. 
 
@@ -80,5 +82,6 @@ To compensate for these issues, more advanced optimization algorithms have emerg
 For a visual comparison of various optimization techniques, refer to the video below. It illustrates how different methods, represented by colored balls, approach finding the minima in a given topology. Specifically, the cyan ball represents vanilla GD, the magenta ball represents momentum-based methods, the white ball represents Adagrad, the green ball represents RMSprop, and the blue ball represents ADAM. This video demonstrates the efficiency and robustness of modern algorithms like RMSprop and ADAM compared to traditional approaches.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ilYd4TAzNoU" frameborder="1" allowfullscreen></iframe>
+<br>
 
 For the full codebase, follow the link to the [github repo](https://github.com/ashwath-karthikeyan/nesterov.git)
