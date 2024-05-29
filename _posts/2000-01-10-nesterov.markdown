@@ -64,10 +64,10 @@ $-(\frac{x_1^2}{20} + \frac{x_2^2}{5})$, in turn, is maximized when $\frac{x_1^2
 
 With this knowledge, let's proceed to see how close and how quickly both methods converge to the value $(0,0)$.
 
-<center><img src="/img/nesterov.png" alt="Lane Fit"  width="400"></center>
+<center><img src="/img/nesterov.png" alt="Lane Fit"  width="700"></center>
 <br>
 
-By running the two algorithms side-by-side, we notice a few things. Firstly, NAG converges faster than GD, as expected, by a factor of approximately 10 iterations. Secondly, the path taken by NAG to reach the minima isn't like GD's. There are a lot of turns in the path, almost like the algorithm makes it go one way, rethinks, and takes a u-turn.
+By running the two algorithms side-by-side, we notice a few things. Firstly, NAG converges faster than GD, as expected, by a factor of approximately 10 iterations, and both methods converge within simmilar distance from $(0,0)$, both in the order of $10^{-6}$. Secondly, the path taken by NAG to reach the minima isn't straightforward like GD's. There are a lot of turns in the path, almost like the algorithm makes it go one way, rethinks, and takes a u-turn.
 
 The explanation for this is that NAG considers the gradient at a future point, and not at the current point, unlike regular momentum-based methods, which allows NAG to adjust its course more frequently, leading to the observed "u-turns" and sudden changes in direction. These adjustments are a result of the algorithm constantly reassessing the path based on both the current gradient and the expected future gradient. This is why NAG can converge faster and more efficiently navigate complex terrains in the optimization landscape compared to the more straightforward but potentially less adaptive path of simple momentum-based and even GD methods.
 
