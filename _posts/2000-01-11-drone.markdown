@@ -1,0 +1,15 @@
+---
+layout: post
+title:  Autonomous Parking in a Self-Driving Car
+permalink: /drone/
+date:   2024-04-15
+image:  camera_drone.png
+tags:   [drone, Perception, Control]
+---
+## Implementation of an Autonomous Parking Functionality in a Self-Driving Car
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/m8HtXCep504" frameborder="1" allowfullscreen></iframe>
+
+documentation coming soon
+
+[github repo](https://github.com/ashwath-karthikeyan/drone.git)
