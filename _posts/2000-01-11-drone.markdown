@@ -1,15 +1,13 @@
 ---
 layout: post
-title:  Autonomous Parking in a Self-Driving Car
+title: Package Detection and Barcode Scanning
 permalink: /drone/
-date:   2024-04-15
+date:   2024-07-23
 image:  camera_drone.png
 tags:   [drone, Perception, Control]
 ---
-## Implementation of an Autonomous Parking Functionality in a Self-Driving Car
+## Package Detection and Barcode Scanning with an Autonomous Drone
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/m8HtXCep504" frameborder="1" allowfullscreen></iframe>
-
-documentation coming soon
 
 [github repo](https://github.com/ashwath-karthikeyan/drone.git)
