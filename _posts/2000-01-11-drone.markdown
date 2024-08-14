@@ -4,7 +4,7 @@ title: Package Detection and Barcode Scanning
 permalink: /drone/
 date:   2024-07-23
 image:  camera_drone.png
-tags:   [drone, Perception, Control]
+tags:   [Drone, Perception, Control]
 ---
 ## Package Detection and Barcode Scanning with an Autonomous Drone
 
