@@ -2,7 +2,7 @@
 layout: post
 title:  Sampling-Based Planning Algorithms
 permalink: /sampling-based-planners/
-date:   2000-01-03
+date:   2024-03-20
 image:  rrt.png
 tags:   [Planning]
 ---

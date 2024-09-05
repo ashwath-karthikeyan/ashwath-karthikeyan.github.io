@@ -2,7 +2,7 @@
 layout: post
 title:  State Estimation using EKF
 permalink: /kalman-filter/
-date:   2000-01-09
+date:   2024-03-05
 image:  ekf1.png
 tags:   [State Estimation, Control]
 ---
