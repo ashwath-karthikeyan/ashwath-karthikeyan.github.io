@@ -4,7 +4,7 @@
 title: Ashwath Karthikeyan Portfolio
 description: My Project Portfolio # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://ashwath-karthikeyan.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://ashwathkart.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 
 
 #-------------------------------
@@ -17,7 +17,7 @@ title-front: "Ashwath Karthikeyan - "
 #-------------------------------
 # Contact links
 linkedin: https://www.linkedin.com/in/ashwath-karthikeyan/
-github: https://github.com/ashwath-karthikeyan
+github: https://github.com/ashwathkart
 email: mailto:ashwath.karthikeyan@gmail.com
 
 

@@ -142,7 +142,7 @@ Now that we have all the components required for the EKF, let's see how the algo
 
 * When the algorithm is started, initialize the state vector $x$ with the initial estimates of the state variables. This would be the first line of the `dataset/controls_observations1.txt` file.
 
-* Initialize the error covariance matrix $P_{t=0}$. The elements of the matrix are given to us in the [problem statement](github.com/ashwath-karthikeyan/kalman-filter).
+* Initialize the error covariance matrix $P_{t=0}$. The elements of the matrix are given to us in the [problem statement](github.com/ashwathkart/kalman-filter).
 
 ###### Step 2 : Prediction
 
@@ -246,4 +246,4 @@ This can be attributed to two possible reasons:
 
 EKF relies heavily on matrix operations and linear algebra, which significantly reduces computation. However, it assumes Gaussian noise and the ability to linearize the system being estimated. This makes it suitable for many applications but inadequate for more complex, non-linear environments. When more computational power is available, other state estimation techniques, such as particle filters, offer a superior alternative. They can handle non-linearities and arbitrary noise distributions more effectively, although they require more complex mathematics and significantly higher computational resources. Despite the increased complexity, particle filters provide robust performance in a wider range of scenarios, making them a more versatile choice for challenging applications.
 
-Here is the [github repo](https://github.com/ashwath-karthikeyan/kalman-filter.git) for the problem statement and solution code.
+Here is the [github repo](https://github.com/ashwathkart/kalman-filter.git) for the problem statement and solution code.

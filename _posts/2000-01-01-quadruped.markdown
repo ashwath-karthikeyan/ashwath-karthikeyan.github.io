@@ -13,4 +13,4 @@ tags:   [Control, Planning, Perception, SLAM]
 
 documentation coming soon
 
-[github repo](https://github.com/ashwath-karthikeyan/quadruped-robot.git)
+[github repo](https://github.com/ashwathkart/quadruped-robot.git)

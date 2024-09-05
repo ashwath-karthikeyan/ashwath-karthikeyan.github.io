@@ -18,4 +18,4 @@ tags:   [Planning]
 
 documentation coming soon
 
-[github repo](https://github.com/ashwath-karthikeyan/sampling-based-planning.git)
+[github repo](https://github.com/ashwathkart/sampling-based-planning.git)

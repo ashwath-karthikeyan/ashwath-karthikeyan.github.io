@@ -13,4 +13,4 @@ tags:   [Autonomous Vehicles, Planning, Perception, Control]
 
 documentation coming soon
 
-[github repo](https://github.com/ashwath-karthikeyan/lane-adherence.git)
+[github repo](https://github.com/ashwathkart/lane-adherence.git)

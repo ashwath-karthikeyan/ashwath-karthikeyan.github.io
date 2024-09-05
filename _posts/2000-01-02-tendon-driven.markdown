@@ -12,4 +12,4 @@ tags:   [Control, Fabrication]
 
 <iframe src="/misc/Development-of-Tendon-Driven-Robot-Leg-Displaying-Gait-Motion.pdf" width="100%" height="600px"></iframe>
 
-[github repo](https://github.com/ashwath-karthikeyan/robot-leg.git)
+[github repo](https://github.com/ashwathkart/robot-leg.git)

@@ -12,4 +12,4 @@ tags:   [Autonomous Vehicles, Perception, Planning, Control]
 
 documentation coming soon
 
-[github repo](https://github.com/ashwath-karthikeyan/GEMstack.git)
+[github repo](https://github.com/ashwathkart/GEMstack.git)

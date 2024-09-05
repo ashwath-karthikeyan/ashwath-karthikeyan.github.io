@@ -20,4 +20,4 @@ tags:   [Planning]
 
 documentation coming soon
 
-[github repo](https://github.com/ashwath-karthikeyan/grid-planning.git)
+[github repo](https://github.com/ashwathkart/grid-planning.git)

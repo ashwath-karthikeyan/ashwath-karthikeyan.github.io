@@ -10,4 +10,4 @@ tags:   [Drone, Perception, Control]
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/m8HtXCep504" frameborder="1" allowfullscreen></iframe>
 
-[github repo](https://github.com/ashwath-karthikeyan/drone.git)
+[github repo](https://github.com/ashwathkart/drone.git)

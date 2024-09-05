@@ -115,4 +115,4 @@ With this controller, we see the performance of the RIP to have improved, even w
 
 State space controllers represent a significant step in control systems, yet they are not the pinnacle of error management and equilibrium maintenance. Advanced methods, including optimization-based strategies like the Linear Quadratic Regulator (LQR), enhance system performance through the minimization of a predetermined cost function. Beyond LQR, approaches like Model Predictive Control (MPC) offer further sophistication by anticipating future states and making adjustments accordingly. Additionally, adaptive control methods adjust to system changes in real-time, ensuring optimal performance under varying conditions. These methodologies extend the capabilities of traditional controllers, offering improved precision and adaptability.
 
-[Follow this link to the github repo for implementation.](https://github.com/ashwath-karthikeyan/rotary-inverted-pendulum.git)
+[Follow this link to the github repo for implementation.](https://github.com/ashwathkart/rotary-inverted-pendulum.git)

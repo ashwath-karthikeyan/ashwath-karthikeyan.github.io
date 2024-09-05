@@ -65,4 +65,4 @@ Implementing SLAM on a TurtleBot3 Waffle in a ROS-Gazebo environment demonstrate
 
 For anyone starting in robotics and ROS, following this guide will help you understand the fundamental concepts and practical steps involved in implementing SLAM on a mobile robot. The resources mentioned, including the TurtleBot3 e-manual and the online course, provide excellent starting points for further exploration and learning in the field of autonomous robotics.
 
-Follow [this link](https://github.com/ashwath-karthikeyan/ros-slam-gazebo.git) to the github repo containing the source code.
+Follow [this link](https://github.com/ashwathkart/ros-slam-gazebo.git) to the github repo containing the source code.
