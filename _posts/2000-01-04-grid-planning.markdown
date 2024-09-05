@@ -2,7 +2,7 @@
 layout: post
 title:  Grid Planning Algorithms
 permalink: /grid-planners/
-date:   2024-01-15
+date:   2000-01-04
 image:  dijkstra.png
 tags:   [Planning]
 ---

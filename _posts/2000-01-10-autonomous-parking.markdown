@@ -2,7 +2,7 @@
 layout: post
 title:  Autonomous Parking in a Self-Driving Car
 permalink: /self-parking/
-date:   2024-04-15
+date:   2001-01-10
 image:  parking.png
 tags:   [Autonomous Vehicles, Perception, Planning, Control]
 ---
